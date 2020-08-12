@@ -17,9 +17,11 @@ namespace CDS.RoslynPadScripting
 
         public CustomRoslynHost(
             Type globalsType,
-            NuGetConfiguration nuGetConfiguration = null,
             IEnumerable<Assembly> additionalAssemblies = null,
-            RoslynHostReferences references = null) : base(nuGetConfiguration, additionalAssemblies, references)
+            RoslynHostReferences references = null) : 
+            base(additionalAssemblies: additionalAssemblies, 
+                references: references,
+                disabledDiagnostics: null)
         {
             this.globalsType = globalsType;
         }

@@ -93,7 +93,7 @@ namespace CDS.RoslynPadScripting
                     Assembly.Load("RoslynPad.Roslyn.Windows"),
                     Assembly.Load("RoslynPad.Editor.Windows")
                 },
-                references: RoslynHostReferences.Default.With(typeNamespaceImports: referenceTypesIncludingGlobalsType));
+                references: RoslynHostReferences.NamespaceDefault.With(typeNamespaceImports: referenceTypesIncludingGlobalsType));
 
             editor.Initialize(roslynHost, new ClassificationHighlightColors(), workingDirectory, "");
             editor.FontFamily = new System.Windows.Media.FontFamily("Consolas");
