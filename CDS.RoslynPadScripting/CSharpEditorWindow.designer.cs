@@ -49,7 +49,6 @@
             this.Name = "CSharpEditorWindow";
             this.Size = new System.Drawing.Size(800, 450);
             this.Load += new System.EventHandler(this.CSEditor_Load);
-            this.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.CSharpEditorWindow_ControlRemoved);
             this.ResumeLayout(false);
 
         }

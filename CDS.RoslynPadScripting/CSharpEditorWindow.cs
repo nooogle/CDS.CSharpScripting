@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using ICSharpCode.AvalonEdit.Highlighting;
 using RoslynPad.Editor;
 using RoslynPad.Roslyn;
-using System.Reflection;
-using ICSharpCode.AvalonEdit.Highlighting;
+using System;
+using System.ComponentModel;
 using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Windows.Forms;
 
 namespace CDS.RoslynPadScripting
 {
@@ -73,27 +68,34 @@ namespace CDS.RoslynPadScripting
             Initialize(referenceTypes: referenceTypes, globalsType: null);
         }
 
+
         public void Initialize(Type[] referenceTypes, Type globalsType)
         {
             editor = new RoslynCodeEditor();
             var workingDirectory = Directory.GetCurrentDirectory();
 
             var referenceTypesIncludingGlobalsType = referenceTypes;
-            if(globalsType != null)
+            if (globalsType != null)
             {
                 var temp = referenceTypes.ToList();
                 temp.Add(globalsType);
                 referenceTypesIncludingGlobalsType = temp.ToArray();
             }
 
+            var namespaceImports =
+                RoslynHostReferences
+                .Empty
+                .With(assemblyReferences: new[] { typeof(int).Assembly })
+                .With(typeNamespaceImports: referenceTypesIncludingGlobalsType);
+
             var roslynHost = new CustomRoslynHost(
                 globalsType: globalsType,
                 additionalAssemblies: new[]
                 {
                     Assembly.Load("RoslynPad.Roslyn.Windows"),
-                    Assembly.Load("RoslynPad.Editor.Windows")
+                    Assembly.Load("RoslynPad.Editor.Windows"),
                 },
-                references: RoslynHostReferences.NamespaceDefault.With(typeNamespaceImports: referenceTypesIncludingGlobalsType));
+                references: namespaceImports);
 
             editor.Initialize(roslynHost, new ClassificationHighlightColors(), workingDirectory, "");
             editor.FontFamily = new System.Windows.Media.FontFamily("Consolas");
@@ -109,11 +111,5 @@ namespace CDS.RoslynPadScripting
         {
             TextChanged?.Invoke(sender, e);
         }
-
-        private void CSharpEditorWindow_ControlRemoved(object sender, ControlEventArgs e)
-        {
-
-        }
     }
 }
-// this is a test 
