@@ -16,26 +16,21 @@ namespace CDS.RoslynPadScripting
     public partial class CSharpEditorWindow: UserControl
     {
         RoslynCodeEditor editor;
+        bool isInitialised;
 
 
-        /// <summary>
-        /// The editor text.
-        /// </summary>
+        /// <inheritdoc/>
         [EditorBrowsable(EditorBrowsableState.Always)]
         [Browsable(true)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         [Bindable(true)]
         public override string Text
         {
-            get
-            {
-                if (editor?.Document != null) { return editor.Document.Text; }
-                else { return null; }
-            }
+            get => isInitialised ? editor.Document.Text : "";
 
             set
             {
-                if (editor?.Document != null)
+                if (isInitialised)
                 {
                     editor.Document.Text = value;
                 }
@@ -44,33 +39,43 @@ namespace CDS.RoslynPadScripting
 
 
         /// <summary>
-        /// Fired when the editor text has changed.
+        /// Fired when the text changes
         /// </summary>
         [Browsable(true)]
         [EditorBrowsable(EditorBrowsableState.Always)]
         public new event EventHandler TextChanged;
 
 
+        /// <summary>
+        /// Basic initialisation
+        /// </summary>
         public CSharpEditorWindow()
         {
             InitializeComponent();
         }
 
-        private void CSEditor_Load(object sender, EventArgs e)
-        {
-            if(DesignMode) { return; }
 
+        public void CDSInitialize(Type[] referenceTypes)
+        {
+            CDSInitialize(referenceTypes: referenceTypes, globalsType: null);
         }
 
 
-        public void Initialize(Type[] referenceTypes)
+        /// <summary>
+        /// Initialise: hides the 'not initialised' message then creates, configures
+        /// and shows a Roslyn code editor.
+        /// </summary>
+        /// <param name="referenceTypes">
+        /// A reference is auto-created for each data type in this list
+        /// </param>
+        /// <param name="globalsType"></param>
+        public void CDSInitialize(Type[] referenceTypes, Type globalsType)
         {
-            Initialize(referenceTypes: referenceTypes, globalsType: null);
-        }
+            if(isInitialised)
+            {
+                CDSUninitialise();
+            }
 
-
-        public void Initialize(Type[] referenceTypes, Type globalsType)
-        {
             editor = new RoslynCodeEditor();
             var workingDirectory = Directory.GetCurrentDirectory();
 
@@ -97,16 +102,54 @@ namespace CDS.RoslynPadScripting
                 },
                 references: namespaceImports);
 
-            editor.Initialize(roslynHost, new ClassificationHighlightColors(), workingDirectory, "");
-            editor.FontFamily = new System.Windows.Media.FontFamily("Consolas");
+            
+            editor.Initialize(
+                roslynHost: roslynHost, 
+                highlightColors: new ClassificationHighlightColors(), 
+                workingDirectory: workingDirectory, 
+                documentText: "");
+
             editor.SyntaxHighlighting = HighlightingManager.Instance.GetDefinition("C#");
-            editor.FontSize = 12.75f;
+            
+            editor.FontFamily = new System.Windows.Media.FontFamily(this.Font.FontFamily.Name);
+            editor.FontSize = this.Font.Size;
+
             wpfEditorHost.Child = editor;
-            this.Controls.Add(wpfEditorHost);
 
             editor.TextChanged += Editor_TextChanged;
+            wpfEditorHost.Dock = DockStyle.Fill;
+            wpfEditorHost.Visible = true;
+            labelNotInitialisedMsg.Visible = false;
+
+            isInitialised = true;
         }
 
+
+        /// <summary>
+        /// Uninitialise: shows the 'not initialised' message and closes down the
+        /// Roslyn code editor.
+        /// </summary>
+        /// <remarks>
+        /// Does nothing if not already initialised.
+        /// </remarks>
+        public void CDSUninitialise()
+        {
+            if(!isInitialised) { return; }
+
+            labelNotInitialisedMsg.Visible = true;
+            wpfEditorHost.Visible = false;
+
+            editor.TextChanged -= Editor_TextChanged;
+            wpfEditorHost.Child = null;
+            editor = null;
+
+            isInitialised = false;
+        }
+
+
+        /// <summary>
+        /// The text has changed - fire up to the owner
+        /// </summary>
         private void Editor_TextChanged(object sender, EventArgs e)
         {
             TextChanged?.Invoke(sender, e);

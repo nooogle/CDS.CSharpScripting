@@ -31,40 +31,35 @@ namespace WindowsFormsAppDemo
 
         Type[] GetReferenceTypes()
         {
-            Type[] types;
+            List<Type> types = new List<Type>();
 
-            if (checkUseCommonNamespaces.Checked)
+            if (checkNamespaceSystem.Checked)
             {
-                types = new[]
-                {
-                    typeof(System.Console),
-                };
-            }
-            else
-            {
-                types = new Type[0];
+                types.Add(typeof(System.Console));
             }
 
-            return types;
+            if(checkNamespaceLinq.Checked)
+            {
+                types.Add(typeof(System.Linq.Enumerable));
+            }
+
+            return types.ToArray();
         }
 
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            csharpEditorWindow.Initialize(
-                referenceTypes: GetReferenceTypes(),
-                globalsType: typeof(Globals));
         }
 
         private void btnCompile_Click(object sender, EventArgs e)
         {
-            outputWindow1.Clear();
+            outputWindow.Clear();
             CompileScript();
         }
 
         private CDS.RoslynPadScripting.CompiledScript CompileScript()
         {
-            outputWindow1.WriteLine("Compiling...");
+            outputWindow.WriteLine("Compiling...");
 
             CompiledScript compiledScript;
 
@@ -75,7 +70,7 @@ namespace WindowsFormsAppDemo
                     scriptReferences: GetReferenceTypes(),
                     assemblyReferences: GetReferenceTypes(),
                     typeOfGlobals: typeof(Globals),
-                    displayDiagnosticsLine: (msg) => outputWindow1.WriteLine(msg));
+                    displayDiagnosticsLine: (msg) => outputWindow.WriteLine(msg));
             }
             else
             {
@@ -84,10 +79,10 @@ namespace WindowsFormsAppDemo
                     scriptReferences: GetReferenceTypes(),
                     assemblyReferences: GetReferenceTypes(),
                     typeOfGlobals: typeof(Globals),
-                    displayDiagnosticsLine: (msg) => outputWindow1.WriteLine(msg));
+                    displayDiagnosticsLine: (msg) => outputWindow.WriteLine(msg));
             }
 
-            outputWindow1.WriteLine("... compiled");
+            outputWindow.WriteLine("... compiled");
 
             return compiledScript;
         }
@@ -99,53 +94,59 @@ namespace WindowsFormsAppDemo
         }
 
 
-        private void RunScript()
+        private object RunScript()
         {
+            object resultAsObject = null;
+
             try
             {
-                outputWindow1.Clear();
+                outputWindow.Clear();
                 var compiledScript = CompileScript();
 
-                outputWindow1.WriteLine("Running...");
+                outputWindow.WriteLine("Running...");
 
                 if (checkRequireStringListResultType.Checked)
                 {
                     var result = ScriptingUtils.RunCompiledScript<List<string>>(
                         compiledScript: compiledScript,
                         globals: globals,
-                        onTextOutput: (text) => outputWindow1.Write(text));
+                        onTextOutput: (text) => outputWindow.Write(text));
+
+                    resultAsObject = result;
 
                     if (result == null)
                     {
-                        outputWindow1.WriteLine($"Result (List<string> type) = null");
+                        outputWindow.WriteLine($"Result (List<string> type) = null");
                     }
                     else
                     {
-                        outputWindow1.WriteLine($"Result (List<string> type) contains {result.Count} items");
+                        outputWindow.WriteLine($"Result (List<string> type) contains {result.Count} items");
                         foreach (var item in result)
                         {
-                            outputWindow1.WriteLine($"Item: {item}");
+                            outputWindow.WriteLine($"Item: {item}");
                         }
                     }
                 }
                 else
                 {
-                    var result = ScriptingUtils.RunCompiledScript<object>(
+                    resultAsObject = ScriptingUtils.RunCompiledScript<object>(
                         compiledScript: compiledScript,
                         globals: globals,
-                        onTextOutput: (text) => outputWindow1.Write(text));
+                        onTextOutput: (text) => outputWindow.Write(text));
 
-                    outputWindow1.WriteLine($"Result (object type) = [{result}]");
+                    outputWindow.WriteLine($"Result (object type) = [{resultAsObject}]");
                 }
 
-                outputWindow1.WriteLine("... run complete");
+                outputWindow.WriteLine("... run complete");
             }
             catch (Exception exception)
             {
-                outputWindow1.WriteLine("Exception caught while running the script");
-                outputWindow1.WriteLine("");
-                outputWindow1.WriteLine(exception.Message);
+                outputWindow.WriteLine("Exception caught while running the script");
+                outputWindow.WriteLine("");
+                outputWindow.WriteLine(exception.Message);
             }
+
+            return resultAsObject;
         }
 
         private void btnDemo1_Click(object sender, EventArgs e)
@@ -155,10 +156,7 @@ namespace WindowsFormsAppDemo
                 "using System;",
                 "Console.WriteLine(\"Hello world\");");
 
-            RunDemo(
-                requireStringListResultType: false,
-                useCommonNamespaces: false,
-                script: script);
+            RunDemo(script);
         }
 
 
@@ -168,19 +166,59 @@ namespace WindowsFormsAppDemo
                 Environment.NewLine,
                 "Console.WriteLine(\"Hello world\");");
 
-            RunDemo(
-                requireStringListResultType: false,
-                useCommonNamespaces: true,
-                script: script);
+            RunDemo(script);
         }
 
 
-        private void RunDemo(bool requireStringListResultType, bool useCommonNamespaces, string script)
+        private object RunDemo(string script)
         {
-            checkRequireStringListResultType.Checked = requireStringListResultType;
-            checkUseCommonNamespaces.Checked = useCommonNamespaces;
             csharpEditorWindow.Text = script;            
-            RunScript();
+            var result = RunScript();
+            return result;
+        }
+
+
+        private void btnInitialise_Click(object sender, EventArgs e)
+        {
+            this.Cursor = Cursors.WaitCursor;
+
+            csharpEditorWindow.CDSInitialize(
+                referenceTypes: GetReferenceTypes(),
+                globalsType: typeof(Globals));
+
+            panelSetupControls.Enabled = false;
+            panelLiveControls.Enabled = true;
+
+            this.Cursor = Cursors.Default;
+        }
+
+        private void btnUninitialise_Click(object sender, EventArgs e)
+        {
+            csharpEditorWindow.CDSUninitialise();
+
+            panelLiveControls.Enabled = false;
+            panelSetupControls.Enabled = true;
+        }
+
+        private void btnDemo3_Click(object sender, EventArgs e)
+        {
+            var script = string.Join(
+                Environment.NewLine,
+                "var info = new[] { \"A\", \"B\", \"C\" };",
+                "return info.ToList();");
+
+            var result = RunDemo(script) as List<string>;
+
+            if(result == null)
+            {
+                MessageBox.Show("The test did NOT return a list of strings");
+            }
+            else
+            {
+                MessageBox.Show($"The test returned a list of [{result.Count}] strings :-)");
+            }
+
+            
         }
     }
 }
