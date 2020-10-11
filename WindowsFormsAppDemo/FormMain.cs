@@ -24,5 +24,13 @@ namespace WindowsFormsAppDemo
                 form.ShowDialog(this);
             }
         }
+
+        private void btnReturnListDemo_Click(object sender, EventArgs e)
+        {
+            using (var form = new FormReturnListDemo())
+            {
+                form.ShowDialog(this);
+            }
+        }
     }
 }

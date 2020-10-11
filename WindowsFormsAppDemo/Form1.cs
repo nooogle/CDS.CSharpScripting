@@ -67,8 +67,8 @@ namespace WindowsFormsAppDemo
             {
                 compiledScript = ScriptingUtils.CompileCSharpScript<List<string>>(
                     script: csharpEditorWindow.Text,
-                    scriptReferences: GetReferenceTypes(),
-                    assemblyReferences: GetReferenceTypes(),
+                    namespaceTypes: GetReferenceTypes(),
+                    referenceTypes: GetReferenceTypes(),
                     typeOfGlobals: typeof(Globals),
                     displayDiagnosticsLine: (msg) => outputWindow.CDSWriteLine(msg));
             }
@@ -76,8 +76,8 @@ namespace WindowsFormsAppDemo
             {
                 compiledScript = ScriptingUtils.CompileCSharpScript<object>(
                     script: csharpEditorWindow.Text,
-                    scriptReferences: GetReferenceTypes(),
-                    assemblyReferences: GetReferenceTypes(),
+                    namespaceTypes: GetReferenceTypes(),
+                    referenceTypes: GetReferenceTypes(),
                     typeOfGlobals: typeof(Globals),
                     displayDiagnosticsLine: (msg) => outputWindow.CDSWriteLine(msg));
             }
@@ -182,9 +182,9 @@ namespace WindowsFormsAppDemo
         {
             this.Cursor = Cursors.WaitCursor;
 
-            csharpEditorWindow.CDSInitialize(
-                referenceTypes: GetReferenceTypes(),
-                globalsType: typeof(Globals));
+            //csharpEditorWindow.CDSInitialize(
+            //    referenceTypes: GetReferenceTypes(),
+            //    globalsType: typeof(Globals));
 
             panelSetupControls.Enabled = false;
             panelLiveControls.Enabled = true;

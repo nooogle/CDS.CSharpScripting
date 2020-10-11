@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CDS.RoslynPadScripting", "C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsAppDemo", "WindowsFormsAppDemo\WindowsFormsAppDemo.csproj", "{92334FFF-56EE-436D-BE17-B97D978ED258}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleAppDemo", "ConsoleAppDemo\ConsoleAppDemo.csproj", "{46EC648F-B372-45EE-A0F0-A2D37D71CF4B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{92334FFF-56EE-436D-BE17-B97D978ED258}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{92334FFF-56EE-436D-BE17-B97D978ED258}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{92334FFF-56EE-436D-BE17-B97D978ED258}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46EC648F-B372-45EE-A0F0-A2D37D71CF4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46EC648F-B372-45EE-A0F0-A2D37D71CF4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46EC648F-B372-45EE-A0F0-A2D37D71CF4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46EC648F-B372-45EE-A0F0-A2D37D71CF4B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

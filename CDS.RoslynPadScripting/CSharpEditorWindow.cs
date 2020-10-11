@@ -2,6 +2,7 @@
 using RoslynPad.Editor;
 using RoslynPad.Roslyn;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -55,43 +56,83 @@ namespace CDS.RoslynPadScripting
         }
 
 
-        public void CDSInitialize(Type[] referenceTypes)
-        {
-            CDSInitialize(referenceTypes: referenceTypes, globalsType: null);
-        }
-
-
         /// <summary>
         /// Initialise: hides the 'not initialised' message then creates, configures
         /// and shows a Roslyn code editor.
         /// </summary>
         /// <param name="referenceTypes">
-        /// A reference is auto-created for each data type in this list
+        /// The assembly for each type in this list is referenced by the editor session.
+        /// Added, for example, typeof(int), will result in the core framework library 
+        /// (mscorlib) being loaded.
         /// </param>
-        /// <param name="globalsType"></param>
-        public void CDSInitialize(Type[] referenceTypes, Type globalsType)
+        /// <param name="namespaceTypes">
+        /// The namespace for each type is made automatically available for each type in
+        /// this list. E.g. sending typeof(int) will make the System namespace available; 
+        /// it's the equivalet of adding 'using System' to the top of the script.
+        /// </param>
+        /// <param name="globalsType">
+        /// Optional (can be null): the type of a global variable made available to the
+        /// script without any other namespace resolution. 
+        /// </param>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown if either of <paramref name="referenceTypes"/> or <paramref name="namespaceTypes"/>
+        /// is null.
+        /// </exception>
+        public void CDSInitialize(
+            IEnumerable<Type> namespaceTypes,
+            IEnumerable<Type> referenceTypes,
+            Type globalsType)
         {
-            if(isInitialised)
-            {
-                CDSUninitialise();
-            }
+            CDSUninitialise();
 
+            if (namespaceTypes == null) { throw new ArgumentNullException(nameof(namespaceTypes)); }
+            if (referenceTypes == null) { throw new ArgumentNullException(nameof(referenceTypes)); }
+
+
+            var referenceTypesIncludingGlobalsType = GenerateAllReferenceTypes(referenceTypes, globalsType);
+            var namespaceTypesIncludingGlobalsType = GenerateAllNamespaceTypes(namespaceTypes, globalsType);
+
+            var roslynHost = CreateRosylnHost(
+                globalsType,
+                referenceTypesIncludingGlobalsType,
+                namespaceTypesIncludingGlobalsType);
+
+            CreateNewEditor(roslynHost);
+
+            isInitialised = true;
+        }
+
+
+        private void CreateNewEditor(CustomRoslynHost roslynHost)
+        {
             editor = new RoslynCodeEditor();
             var workingDirectory = Directory.GetCurrentDirectory();
 
-            var referenceTypesIncludingGlobalsType = referenceTypes;
-            if (globalsType != null)
-            {
-                var temp = referenceTypes.ToList();
-                temp.Add(globalsType);
-                referenceTypesIncludingGlobalsType = temp.ToArray();
-            }
+            editor.Initialize(
+                roslynHost: roslynHost,
+                highlightColors: new ClassificationHighlightColors(),
+                workingDirectory: workingDirectory,
+                documentText: "");
 
+            editor.SyntaxHighlighting = HighlightingManager.Instance.GetDefinition("C#");
+            editor.FontFamily = new System.Windows.Media.FontFamily(this.Font.FontFamily.Name);
+            editor.FontSize = this.Font.Size;
+            editor.TextChanged += Editor_TextChanged;
+            wpfEditorHost.Dock = DockStyle.Fill;
+            wpfEditorHost.Visible = true;
+            labelNotInitialisedMsg.Visible = false;
+            wpfEditorHost.Child = editor;
+        }
+
+
+        private static CustomRoslynHost CreateRosylnHost(Type globalsType, List<Assembly> referenceTypesIncludingGlobalsType, List<Type> namespaceTypesIncludingGlobalsType)
+        {
             var namespaceImports =
                 RoslynHostReferences
                 .Empty
-                .With(assemblyReferences: new[] { typeof(int).Assembly })
-                .With(typeNamespaceImports: referenceTypesIncludingGlobalsType);
+                .With(assemblyReferences: referenceTypesIncludingGlobalsType)
+                .With(typeNamespaceImports: namespaceTypesIncludingGlobalsType);
+
 
             var roslynHost = new CustomRoslynHost(
                 globalsType: globalsType,
@@ -101,27 +142,33 @@ namespace CDS.RoslynPadScripting
                     Assembly.Load("RoslynPad.Editor.Windows"),
                 },
                 references: namespaceImports);
+            return roslynHost;
+        }
 
-            
-            editor.Initialize(
-                roslynHost: roslynHost, 
-                highlightColors: new ClassificationHighlightColors(), 
-                workingDirectory: workingDirectory, 
-                documentText: "");
 
-            editor.SyntaxHighlighting = HighlightingManager.Instance.GetDefinition("C#");
-            
-            editor.FontFamily = new System.Windows.Media.FontFamily(this.Font.FontFamily.Name);
-            editor.FontSize = this.Font.Size;
+        private static List<Type> GenerateAllNamespaceTypes(IEnumerable<Type> namespaceTypes, Type globalsType)
+        {
+            List<Type> namespaceTypesIncludingGlobalsType = new List<Type>(namespaceTypes);
 
-            wpfEditorHost.Child = editor;
+            if (globalsType != null)
+            {
+                namespaceTypesIncludingGlobalsType.Append(globalsType);
+            }
 
-            editor.TextChanged += Editor_TextChanged;
-            wpfEditorHost.Dock = DockStyle.Fill;
-            wpfEditorHost.Visible = true;
-            labelNotInitialisedMsg.Visible = false;
+            return namespaceTypesIncludingGlobalsType;
+        }
 
-            isInitialised = true;
+
+        private static List<Assembly> GenerateAllReferenceTypes(IEnumerable<Type> referenceTypes, Type globalsType)
+        {
+            List<Assembly> referenceTypesIncludingGlobalsType = referenceTypes.Select(rt => rt.Assembly).ToList();
+
+            if (globalsType != null)
+            {
+                referenceTypesIncludingGlobalsType.Append(globalsType.Assembly);
+            }
+
+            return referenceTypesIncludingGlobalsType;
         }
 
 

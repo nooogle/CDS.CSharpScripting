@@ -12,7 +12,8 @@ namespace WindowsFormsAppDemo
 {
     public partial class FormBasicDemo : Form
     {
-        Type[] defaultAssemblyAndReferenceTypes = new[] { typeof(System.Console) };
+        Type[] defaultReferenceTypes = new[] { typeof(int) };
+        Type[] defaultNamespaceTypes = new[] { typeof(int) };
 
 
         public FormBasicDemo()
@@ -24,7 +25,12 @@ namespace WindowsFormsAppDemo
         private void FormBasicDemo_Load(object sender, EventArgs e)
         {
             Cursor = Cursors.WaitCursor;
-            csharpEditorWindow.CDSInitialize(defaultAssemblyAndReferenceTypes);
+            
+            csharpEditorWindow.CDSInitialize(
+                namespaceTypes: defaultNamespaceTypes,
+                referenceTypes: defaultReferenceTypes,
+                globalsType: null);
+
             csharpEditorWindow.Text = "Console.WriteLine(\"Hello world!\");";
             Cursor = Cursors.Default;
         }
@@ -51,8 +57,8 @@ namespace WindowsFormsAppDemo
 
             var compiledScript = CDS.RoslynPadScripting.ScriptingUtils.CompileCSharpScript<object>(
                 script: csharpEditorWindow.Text,
-                scriptReferences: defaultAssemblyAndReferenceTypes,
-                assemblyReferences: defaultAssemblyAndReferenceTypes,
+                namespaceTypes: defaultNamespaceTypes,
+                referenceTypes: defaultReferenceTypes,
                 typeOfGlobals: null,
                 displayDiagnosticsLine: (msg) => compilationOutput.CDSWriteLine(msg));
 

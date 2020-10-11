@@ -33,23 +33,23 @@ namespace CDS.RoslynPadScripting
         /// return anything or nothing (a special case).
         /// </summary>
         /// <param name="script">Script text to compile</param>
-        /// <param name="scriptReferences">An array of references. E.g. "System.Math"</param>
-        /// <param name="assemblyReferences">An array assemblies to reference; the assembly for each type in this array is loaded and made available to the script</param>
+        /// <param name="namespaceTypes">An array of references. E.g. "System.Math"</param>
+        /// <param name="referenceTypes">An array assemblies to reference; the assembly for each type in this array is loaded and made available to the script</param>
         /// <param name="typeOfGlobals">Type of the Globals class used to provide global params to the script; null if not required.</param>
         /// <param name="displayDiagnosticsLine">Optional callback to let caller display (or save etc.) compilation diagnostics</param>
         /// <typeparam name="ReturnType">The type of object that is returned from the script</typeparam>
         /// <returns>A compiled script</returns>
         public static CompiledScript CompileCSharpScript<ReturnType>(
             string script,
-            Type[] scriptReferences,
-            Type[] assemblyReferences,
+            Type[] namespaceTypes,
+            Type[] referenceTypes,
             Type typeOfGlobals,
             Action<string> displayDiagnosticsLine)
         {
             GC.Collect();
 
-            var scriptOptions = ScriptOptions.Default.WithImports(scriptReferences.Select(r => r.Namespace));
-            scriptOptions = scriptOptions.AddReferences(assemblyReferences.Select(a => a.Assembly));
+            var scriptOptions = ScriptOptions.Default.WithImports(namespaceTypes.Select(r => r.Namespace));
+            scriptOptions = scriptOptions.AddReferences(referenceTypes.Select(a => a.Assembly));
 
             var compiledScript = CSharpScript.Create<ReturnType>(
                  script,
