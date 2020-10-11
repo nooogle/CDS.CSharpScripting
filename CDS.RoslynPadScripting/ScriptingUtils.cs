@@ -51,14 +51,6 @@ namespace CDS.RoslynPadScripting
             var scriptOptions = ScriptOptions.Default.WithImports(scriptReferences.Select(r => r.Namespace));
             scriptOptions = scriptOptions.AddReferences(assemblyReferences.Select(a => a.Assembly));
 
-            //var assemblies = new List<Assembly>();
-            //foreach (var assemblyReference in assemblyReferences)
-            //{
-            //    assemblies.Add(Assembly.GetAssembly(assemblyReference));
-            //}
-
-            //scriptOptions = scriptOptions.AddReferences( assemblies.ToArray());
-
             var compiledScript = CSharpScript.Create<ReturnType>(
                  script,
                  globalsType: typeOfGlobals,
@@ -108,8 +100,7 @@ namespace CDS.RoslynPadScripting
             var originalConsoleOut = Console.Out;
             var consoleHooker = new ConsoleOutputHooker();
             consoleHooker.OnWrite += (value) => { onTextOutput?.Invoke(value); };
-            consoleHooker.OnWriteLine += (value) => { onTextOutput?.Invoke(value + "\n"); };
-
+            
             Console.SetOut(consoleHooker);
 
             var runTask = compiledScript.ActualScript.RunAsync(globals);

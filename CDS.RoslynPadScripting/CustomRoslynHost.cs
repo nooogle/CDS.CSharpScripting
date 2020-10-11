@@ -17,8 +17,8 @@ namespace CDS.RoslynPadScripting
 
         public CustomRoslynHost(
             Type globalsType,
-            IEnumerable<Assembly> additionalAssemblies = null,
-            RoslynHostReferences references = null) : 
+            IEnumerable<Assembly> additionalAssemblies,
+            RoslynHostReferences references) : 
             base(additionalAssemblies: additionalAssemblies, 
                 references: references,
                 disabledDiagnostics: null)
@@ -26,7 +26,12 @@ namespace CDS.RoslynPadScripting
             this.globalsType = globalsType;
         }
 
-        protected override Project CreateProject(Solution solution, DocumentCreationArgs args, CompilationOptions compilationOptions, Project previousProject = null)
+
+        protected override Project CreateProject(
+            Solution solution, 
+            DocumentCreationArgs args, 
+            CompilationOptions compilationOptions, 
+            Project previousProject)
         {
             var name = args.Name ?? "Program";
             var id = ProjectId.CreateNewId(name);

@@ -35,7 +35,7 @@ namespace CDS.RoslynPadScripting
         /// <summary>
         /// Clear the text
         /// </summary>
-        public void Clear()
+        public void CDSClear()
         {
             PerformTextOperation(() => scintilla.Text = "");            
         }
@@ -44,7 +44,7 @@ namespace CDS.RoslynPadScripting
         /// <summary>
         /// Clear the text
         /// </summary>
-        public void Write(string text)
+        public void CDSWrite(string text)
         {
             PerformTextOperation(() => scintilla.AppendText(text));
         }
@@ -53,7 +53,7 @@ namespace CDS.RoslynPadScripting
         /// <summary>
         /// Write text and append a carriage return
         /// </summary>
-        public void WriteLine(string text)
+        public void CDSWriteLine(string text)
         {
             PerformTextOperation(() => scintilla.AppendText(text + "\n"));
         }

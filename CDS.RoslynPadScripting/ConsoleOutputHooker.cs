@@ -11,24 +11,29 @@ namespace CDS.RoslynPadScripting
     /// </summary>
     class ConsoleOutputHooker : TextWriter
     {
-        public event Action<string> OnWriteLine;
         public event Action<string> OnWrite;
 
 
-        public override void WriteLine(string value)
+        public override void Write(char value)
         {
-            OnWriteLine?.Invoke(value);
-            base.WriteLine(value);
+            OnWrite?.Invoke(value.ToString());
         }
-
 
         public override void Write(string value)
         {
             OnWrite?.Invoke(value);
-            base.Write(value);
         }
 
 
+        public override void Write(char[] buffer, int index, int count)
+        {
+            OnWrite?.Invoke(new string(buffer, index, count));
+        }
+
+
+        /// <summary>
+        /// TBD why do this???
+        /// </summary>
         public override Encoding Encoding
         {
             get { return Encoding.Unicode; }

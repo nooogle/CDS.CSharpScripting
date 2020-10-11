@@ -53,13 +53,13 @@ namespace WindowsFormsAppDemo
 
         private void btnCompile_Click(object sender, EventArgs e)
         {
-            outputWindow.Clear();
+            outputWindow.CDSClear();
             CompileScript();
         }
 
         private CDS.RoslynPadScripting.CompiledScript CompileScript()
         {
-            outputWindow.WriteLine("Compiling...");
+            outputWindow.CDSWriteLine("Compiling...");
 
             CompiledScript compiledScript;
 
@@ -70,7 +70,7 @@ namespace WindowsFormsAppDemo
                     scriptReferences: GetReferenceTypes(),
                     assemblyReferences: GetReferenceTypes(),
                     typeOfGlobals: typeof(Globals),
-                    displayDiagnosticsLine: (msg) => outputWindow.WriteLine(msg));
+                    displayDiagnosticsLine: (msg) => outputWindow.CDSWriteLine(msg));
             }
             else
             {
@@ -79,10 +79,10 @@ namespace WindowsFormsAppDemo
                     scriptReferences: GetReferenceTypes(),
                     assemblyReferences: GetReferenceTypes(),
                     typeOfGlobals: typeof(Globals),
-                    displayDiagnosticsLine: (msg) => outputWindow.WriteLine(msg));
+                    displayDiagnosticsLine: (msg) => outputWindow.CDSWriteLine(msg));
             }
 
-            outputWindow.WriteLine("... compiled");
+            outputWindow.CDSWriteLine("... compiled");
 
             return compiledScript;
         }
@@ -100,30 +100,30 @@ namespace WindowsFormsAppDemo
 
             try
             {
-                outputWindow.Clear();
+                outputWindow.CDSClear();
                 var compiledScript = CompileScript();
 
-                outputWindow.WriteLine("Running...");
+                outputWindow.CDSWriteLine("Running...");
 
                 if (checkRequireStringListResultType.Checked)
                 {
                     var result = ScriptingUtils.RunCompiledScript<List<string>>(
                         compiledScript: compiledScript,
                         globals: globals,
-                        onTextOutput: (text) => outputWindow.Write(text));
+                        onTextOutput: (text) => outputWindow.CDSWrite(text));
 
                     resultAsObject = result;
 
                     if (result == null)
                     {
-                        outputWindow.WriteLine($"Result (List<string> type) = null");
+                        outputWindow.CDSWriteLine($"Result (List<string> type) = null");
                     }
                     else
                     {
-                        outputWindow.WriteLine($"Result (List<string> type) contains {result.Count} items");
+                        outputWindow.CDSWriteLine($"Result (List<string> type) contains {result.Count} items");
                         foreach (var item in result)
                         {
-                            outputWindow.WriteLine($"Item: {item}");
+                            outputWindow.CDSWriteLine($"Item: {item}");
                         }
                     }
                 }
@@ -132,18 +132,18 @@ namespace WindowsFormsAppDemo
                     resultAsObject = ScriptingUtils.RunCompiledScript<object>(
                         compiledScript: compiledScript,
                         globals: globals,
-                        onTextOutput: (text) => outputWindow.Write(text));
+                        onTextOutput: (text) => outputWindow.CDSWrite(text));
 
-                    outputWindow.WriteLine($"Result (object type) = [{resultAsObject}]");
+                    outputWindow.CDSWriteLine($"Result (object type) = [{resultAsObject}]");
                 }
 
-                outputWindow.WriteLine("... run complete");
+                outputWindow.CDSWriteLine("... run complete");
             }
             catch (Exception exception)
             {
-                outputWindow.WriteLine("Exception caught while running the script");
-                outputWindow.WriteLine("");
-                outputWindow.WriteLine(exception.Message);
+                outputWindow.CDSWriteLine("Exception caught while running the script");
+                outputWindow.CDSWriteLine("");
+                outputWindow.CDSWriteLine(exception.Message);
             }
 
             return resultAsObject;
