@@ -30,6 +30,7 @@
         {
             this.btnBasicDemo = new System.Windows.Forms.Button();
             this.btnReturnListDemo = new System.Windows.Forms.Button();
+            this.btnGlobalsDemo = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnBasicDemo
@@ -54,12 +55,23 @@
             this.btnReturnListDemo.UseVisualStyleBackColor = true;
             this.btnReturnListDemo.Click += new System.EventHandler(this.btnReturnListDemo_Click);
             // 
+            // btnGlobalsDemo
+            // 
+            this.btnGlobalsDemo.Location = new System.Drawing.Point(58, 347);
+            this.btnGlobalsDemo.Margin = new System.Windows.Forms.Padding(6);
+            this.btnGlobalsDemo.Name = "btnGlobalsDemo";
+            this.btnGlobalsDemo.Size = new System.Drawing.Size(184, 113);
+            this.btnGlobalsDemo.TabIndex = 5;
+            this.btnGlobalsDemo.Text = "Globals";
+            this.btnGlobalsDemo.UseVisualStyleBackColor = true;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1030, 531);
             this.ControlBox = false;
+            this.Controls.Add(this.btnGlobalsDemo);
             this.Controls.Add(this.btnReturnListDemo);
             this.Controls.Add(this.btnBasicDemo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -74,5 +86,6 @@
 
         private System.Windows.Forms.Button btnBasicDemo;
         private System.Windows.Forms.Button btnReturnListDemo;
+        private System.Windows.Forms.Button btnGlobalsDemo;
     }
 }

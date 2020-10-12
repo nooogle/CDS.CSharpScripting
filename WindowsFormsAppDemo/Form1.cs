@@ -65,7 +65,7 @@ namespace WindowsFormsAppDemo
 
             if (checkRequireStringListResultType.Checked)
             {
-                compiledScript = ScriptingUtils.CompileCSharpScript<List<string>>(
+                compiledScript = ScriptCompiler.Compile<List<string>>(
                     script: csharpEditorWindow.Text,
                     namespaceTypes: GetReferenceTypes(),
                     referenceTypes: GetReferenceTypes(),
@@ -74,7 +74,7 @@ namespace WindowsFormsAppDemo
             }
             else
             {
-                compiledScript = ScriptingUtils.CompileCSharpScript<object>(
+                compiledScript = ScriptCompiler.Compile<object>(
                     script: csharpEditorWindow.Text,
                     namespaceTypes: GetReferenceTypes(),
                     referenceTypes: GetReferenceTypes(),
@@ -100,44 +100,45 @@ namespace WindowsFormsAppDemo
 
             try
             {
-                outputWindow.CDSClear();
-                var compiledScript = CompileScript();
-
-                outputWindow.CDSWriteLine("Running...");
-
-                if (checkRequireStringListResultType.Checked)
+                using (var console = new CDS.RoslynPadScripting.ConsoleOutputHook(msg => outputWindow.CDSWrite(msg)))
                 {
-                    var result = ScriptingUtils.RunCompiledScript<List<string>>(
-                        compiledScript: compiledScript,
-                        globals: globals,
-                        onTextOutput: (text) => outputWindow.CDSWrite(text));
+                    outputWindow.CDSClear();
+                    var compiledScript = CompileScript();
 
-                    resultAsObject = result;
+                    outputWindow.CDSWriteLine("Running...");
 
-                    if (result == null)
+                    if (checkRequireStringListResultType.Checked)
                     {
-                        outputWindow.CDSWriteLine($"Result (List<string> type) = null");
+                        var result = ScriptRunner.Run<List<string>>(
+                            compiledScript: compiledScript,
+                            globals: globals);
+
+                        resultAsObject = result;
+
+                        if (result == null)
+                        {
+                            outputWindow.CDSWriteLine($"Result (List<string> type) = null");
+                        }
+                        else
+                        {
+                            outputWindow.CDSWriteLine($"Result (List<string> type) contains {result.Count} items");
+                            foreach (var item in result)
+                            {
+                                outputWindow.CDSWriteLine($"Item: {item}");
+                            }
+                        }
                     }
                     else
                     {
-                        outputWindow.CDSWriteLine($"Result (List<string> type) contains {result.Count} items");
-                        foreach (var item in result)
-                        {
-                            outputWindow.CDSWriteLine($"Item: {item}");
-                        }
+                        resultAsObject = ScriptRunner.Run<object>(
+                            compiledScript: compiledScript,
+                            globals: globals);
+
+                        outputWindow.CDSWriteLine($"Result (object type) = [{resultAsObject}]");
                     }
-                }
-                else
-                {
-                    resultAsObject = ScriptingUtils.RunCompiledScript<object>(
-                        compiledScript: compiledScript,
-                        globals: globals,
-                        onTextOutput: (text) => outputWindow.CDSWrite(text));
 
-                    outputWindow.CDSWriteLine($"Result (object type) = [{resultAsObject}]");
+                    outputWindow.CDSWriteLine("... run complete");
                 }
-
-                outputWindow.CDSWriteLine("... run complete");
             }
             catch (Exception exception)
             {

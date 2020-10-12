@@ -15,10 +15,12 @@ namespace ConsoleAppDemo
             // TODO the runtime output does't work - the scriptung utils class hooks it for itself 
             // and we get all sorts of problems !
 
+            // TODO single-function method for quick scripting
+
             var scriptText = "Console.WriteLine(\"Hello console world!\");";
             var compiledScript = default(CompiledScript);
 
-            compiledScript = ScriptingUtils.CompileCSharpScript<object>(
+            compiledScript = ScriptCompiler.Compile<object>(
                 script: scriptText,
                 namespaceTypes: new[] { typeof(int), typeof(List<string>) },
                 referenceTypes: new[] { typeof(int) },
@@ -28,10 +30,9 @@ namespace ConsoleAppDemo
 
             try
             {
-                ScriptingUtils.RunCompiledScript(
+                ScriptRunner.Run(
                     compiledScript: compiledScript,
-                    globals: null,
-                    onTextOutput: (msg) => Console.WriteLine($"Runtime outut: [{msg}]"));
+                    globals: null);
             }
             catch (Exception exception)
             {

@@ -55,7 +55,7 @@ namespace WindowsFormsAppDemo
         {
             compilationOutput.CDSWriteLine("* Compiling *");
 
-            var compiledScript = CDS.RoslynPadScripting.ScriptingUtils.CompileCSharpScript<object>(
+            var compiledScript = CDS.RoslynPadScripting.ScriptCompiler.Compile<object>(
                 script: csharpEditorWindow.Text,
                 namespaceTypes: defaultNamespaceTypes,
                 referenceTypes: defaultReferenceTypes,
@@ -72,19 +72,21 @@ namespace WindowsFormsAppDemo
         {
             runtimeOutput.CDSWriteLine("* Running script *");
 
-            try
+            using (var console = new CDS.RoslynPadScripting.ConsoleOutputHook(msg => runtimeOutput.CDSWrite(msg)))
             {
-                CDS.RoslynPadScripting.ScriptingUtils.RunCompiledScript(
-                    compiledScript: compiledScript,
-                    globals: null,
-                    onTextOutput: (msg) => runtimeOutput.CDSWrite(msg));
-            }
-            catch (Exception exception)
-            {
-                runtimeOutput.CDSWriteLine("");
-                runtimeOutput.CDSWriteLine("Exception caught while running the script");
-                runtimeOutput.CDSWriteLine("");
-                runtimeOutput.CDSWriteLine(exception.Message);
+                try
+                {
+                    CDS.RoslynPadScripting.ScriptRunner.Run(
+                        compiledScript: compiledScript,
+                        globals: null);
+                }
+                catch (Exception exception)
+                {
+                    runtimeOutput.CDSWriteLine("");
+                    runtimeOutput.CDSWriteLine("Exception caught while running the script");
+                    runtimeOutput.CDSWriteLine("");
+                    runtimeOutput.CDSWriteLine(exception.Message);
+                }
             }
 
             runtimeOutput.CDSWriteLine("* Script run complete *");

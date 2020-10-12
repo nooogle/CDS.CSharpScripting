@@ -151,7 +151,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CompiledScript.cs" />
-    <Compile Include="ConsoleOutputHooker.cs" />
+    <Compile Include="ConsoleOutputHook.cs" />
     <Compile Include="CSharpEditorWindow.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -164,7 +164,8 @@
     <Compile Include="OutputWindow.designer.cs">
       <DependentUpon>OutputWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="ScriptingUtils.cs" />
+    <Compile Include="ScriptRunner.cs" />
+    <Compile Include="ScriptCompiler.cs" />
     <Compile Include="CustomRoslynHost.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />

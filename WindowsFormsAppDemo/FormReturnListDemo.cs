@@ -94,7 +94,7 @@ namespace WindowsFormsAppDemo
         {
             compilationOutput.CDSWriteLine("* Compiling *");
 
-            var compiledScript = CDS.RoslynPadScripting.ScriptingUtils.CompileCSharpScript<List<string>>(
+            var compiledScript = CDS.RoslynPadScripting.ScriptCompiler.Compile<List<string>>(
                 script: csharpEditorWindow.Text,
                 namespaceTypes: defaultNamespaceTypes,
                 referenceTypes: defaultReferenceTypes,
@@ -109,23 +109,25 @@ namespace WindowsFormsAppDemo
 
         private List<string> RunScript(CDS.RoslynPadScripting.CompiledScript compiledScript)
         {
+            List<string> result = null;
             runtimeOutput.CDSWriteLine("* Running script *");
 
-            List<string> result = null;
+            using (var console = new CDS.RoslynPadScripting.ConsoleOutputHook(msg => runtimeOutput.CDSWrite(msg)))
+            {
 
-            try
-            {
-                result = CDS.RoslynPadScripting.ScriptingUtils.RunCompiledScript<List<string>>(
-                    compiledScript: compiledScript,
-                    globals: null,
-                    onTextOutput: (msg) => runtimeOutput.CDSWrite(msg));
-            }
-            catch (Exception exception)
-            {
-                runtimeOutput.CDSWriteLine("");
-                runtimeOutput.CDSWriteLine("Exception caught while running the script");
-                runtimeOutput.CDSWriteLine("");
-                runtimeOutput.CDSWriteLine(exception.Message);
+                try
+                {
+                    result = CDS.RoslynPadScripting.ScriptRunner.Run<List<string>>(
+                        compiledScript: compiledScript,
+                        globals: null);
+                }
+                catch (Exception exception)
+                {
+                    runtimeOutput.CDSWriteLine("");
+                    runtimeOutput.CDSWriteLine("Exception caught while running the script");
+                    runtimeOutput.CDSWriteLine("");
+                    runtimeOutput.CDSWriteLine(exception.Message);
+                }
             }
 
             runtimeOutput.CDSWriteLine("* Script run complete *");
