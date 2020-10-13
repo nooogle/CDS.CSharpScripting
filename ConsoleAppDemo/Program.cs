@@ -2,6 +2,7 @@
 using System;
 using System.CodeDom;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,11 +11,23 @@ namespace ConsoleAppDemo
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
-            // TODO the runtime output does't work - the scriptung utils class hooks it for itself 
-            // and we get all sorts of problems !
+            var menu = new (string text, Action action)[]
+                {
+                    ("EasyScript: hello world", EasyScriptDemos.HelloWorld),
+                    ("EasyScript: compile error", EasyScriptDemos.CompileError),
+                    ("EasyScript: return type", EasyScriptDemos.ReturnType),
+                    ("EasyScript: enter your own!", EasyScriptDemos.EnterYourOwn),
+                    ("EasyScript: access host data from script", EasyScriptDemos.HostData),
+                }.ToImmutableArray();
 
+            TextMenu.Run("Main", menu);
+        }
+
+
+        static void xMain()
+        {
             // TODO single-function method for quick scripting
 
             var scriptText = "Console.WriteLine(\"Hello console world!\");";
@@ -24,8 +37,9 @@ namespace ConsoleAppDemo
                 script: scriptText,
                 namespaceTypes: new[] { typeof(int), typeof(List<string>) },
                 referenceTypes: new[] { typeof(int) },
-                typeOfGlobals: null,
-                displayDiagnosticsLine: (msg) => Console.WriteLine($"Compiler output: [{msg}]"));
+                typeOfGlobals: null);
+
+            //                 displayDiagnosticsLine: (msg) => Console.WriteLine($"Compiler output: [{msg}]"));
 
 
             try

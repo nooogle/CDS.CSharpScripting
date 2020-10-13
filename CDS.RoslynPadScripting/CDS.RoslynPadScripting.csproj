@@ -150,6 +150,7 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CompilationOutput.cs" />
     <Compile Include="CompiledScript.cs" />
     <Compile Include="ConsoleOutputHook.cs" />
     <Compile Include="CSharpEditorWindow.cs">
@@ -158,6 +159,7 @@
     <Compile Include="CSharpEditorWindow.designer.cs">
       <DependentUpon>CSharpEditorWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="EasyScript.cs" />
     <Compile Include="OutputWindow.cs">
       <SubType>UserControl</SubType>
     </Compile>

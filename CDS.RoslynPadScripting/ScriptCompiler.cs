@@ -28,8 +28,7 @@ namespace CDS.RoslynPadScripting
             string script,
             Type[] namespaceTypes,
             Type[] referenceTypes,
-            Type typeOfGlobals,
-            Action<string> displayDiagnosticsLine)
+            Type typeOfGlobals)
         {
             GC.Collect();
 
@@ -42,23 +41,13 @@ namespace CDS.RoslynPadScripting
                  options: scriptOptions);
 
             compiledScript.Compile();
+            var diagnostics = compiledScript.GetCompilation().GetDiagnostics();
 
-            if (displayDiagnosticsLine != null)
-            {
-                var diagnostics = compiledScript.GetCompilation().GetDiagnostics();
-                if (diagnostics.Any())
-                {
-                    foreach (var diagnostic in diagnostics)
-                    {
-                        displayDiagnosticsLine($"{diagnostic}");
-                    }
-                }
-            }
+            var compilationWrapper = new CompiledScript(
+                compiledScript,
+                diagnostics);
 
-            return new CompiledScript()
-            {
-                ActualScript = compiledScript,
-            };
+            return compilationWrapper;
         }
     }
 }
