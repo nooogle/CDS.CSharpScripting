@@ -152,7 +152,7 @@ namespace CDS.RoslynPadScripting
 
             if (globalsType != null)
             {
-                namespaceTypesIncludingGlobalsType.Append(globalsType);
+                namespaceTypesIncludingGlobalsType.Add(globalsType);
             }
 
             return namespaceTypesIncludingGlobalsType;
@@ -165,7 +165,7 @@ namespace CDS.RoslynPadScripting
 
             if (globalsType != null)
             {
-                referenceTypesIncludingGlobalsType.Append(globalsType.Assembly);
+                referenceTypesIncludingGlobalsType.Add(globalsType.Assembly);
             }
 
             return referenceTypesIncludingGlobalsType;

@@ -64,6 +64,7 @@
             this.btnGlobalsDemo.TabIndex = 5;
             this.btnGlobalsDemo.Text = "Globals";
             this.btnGlobalsDemo.UseVisualStyleBackColor = true;
+            this.btnGlobalsDemo.Click += new System.EventHandler(this.btnGlobalsDemo_Click);
             // 
             // FormMain
             // 

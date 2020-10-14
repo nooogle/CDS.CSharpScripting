@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace WindowsFormsAppDemo
 {
-    public partial class FormReturnListDemo : Form
+    public partial class FormGlobalsDemo : Form
     {
         Type[] defaultReferenceTypes = new[] 
         { 
@@ -22,27 +22,40 @@ namespace WindowsFormsAppDemo
         };
 
 
-        public FormReturnListDemo()
+        public class Globals
+        {
+            /// <summary>
+            /// An animal - this is XML documentation for the script !!!
+            /// </summary>
+            public string Animal { get; set; } = "Tiger";
+        }
+
+
+        private Globals globals = new Globals();
+
+
+        public FormGlobalsDemo()
         {
             InitializeComponent();
         }
 
 
-        private void FormReturnListDemo_Load(object sender, EventArgs e)
+        private void FormGlobalsDemo_Load(object sender, EventArgs e)
         {
             Cursor = Cursors.WaitCursor;
             
             csharpEditorWindow.CDSInitialize(
                 namespaceTypes: defaultNamespaceTypes,
                 referenceTypes: defaultReferenceTypes,
-                globalsType: null);
+                globalsType: typeof(Globals));
 
             csharpEditorWindow.Text = string.Join(
                 Environment.NewLine,
-                "// using clauses and references are not required; this demo programatically",
-                "// configured both the editor and script compiler with the appropriate types",
-                "var myList = new[] { \"A\", \"B\" }.ToList();",
-                "return myList;");
+                "// The public methods and properties of the Global class instance are",
+                "// directly available in this script",
+                "Console.WriteLine(Animal);",
+                "Animal = \"Shark\";",
+                "Console.WriteLine(Animal);");
 
             Cursor = Cursors.Default;
         }
@@ -52,34 +65,7 @@ namespace WindowsFormsAppDemo
         {
             PrepareToCompileAndRun();
             var compiledScript = CompileScript();
-            var result = RunScript(compiledScript);
-            DisplayResult(result);
-        }
-
-
-        private void DisplayResult(List<string> result)
-        {
-            var msg = new StringBuilder();
-
-            if (result == null)
-            {
-                msg.Append("Expected to get a list of strings but got a null object instead :-(");
-            }
-            else
-            {
-                msg.Append($"Got a list of strings back from the script...{Environment.NewLine}");
-                for(int index = 0; index < result.Count; index++)
-                {
-                    msg.Append($"{index}: {result[index]}{Environment.NewLine}");
-                }
-            }
-
-            MessageBox.Show(
-                owner: this,
-                text: msg.ToString(),
-                caption: Application.ProductName,
-                buttons: MessageBoxButtons.OK,
-                icon: MessageBoxIcon.Information);
+            RunScript(compiledScript);
         }
 
 
@@ -98,8 +84,7 @@ namespace WindowsFormsAppDemo
                 script: csharpEditorWindow.Text,
                 namespaceTypes: defaultNamespaceTypes,
                 referenceTypes: defaultReferenceTypes,
-                typeOfGlobals: null);
-
+                typeOfGlobals: typeof(Globals));
 
             DisplayCompilationOutput(compiledScript);
 
@@ -122,9 +107,8 @@ namespace WindowsFormsAppDemo
         }
 
 
-        private List<string> RunScript(CDS.RoslynPadScripting.CompiledScript compiledScript)
+        private void RunScript(CDS.RoslynPadScripting.CompiledScript compiledScript)
         {
-            List<string> result = null;
             runtimeOutput.CDSWriteLine("* Running script *");
 
             using (var console = new CDS.RoslynPadScripting.ConsoleOutputHook(msg => runtimeOutput.CDSWrite(msg)))
@@ -132,9 +116,11 @@ namespace WindowsFormsAppDemo
 
                 try
                 {
-                    result = CDS.RoslynPadScripting.ScriptRunner.Run<List<string>>(
+                    CDS.RoslynPadScripting.ScriptRunner.Run(
                         compiledScript: compiledScript,
-                        globals: null);
+                        globals: globals);
+
+                    runtimeOutput.CDSWriteLine($"* Script run is complete: the new value of Animal is [{globals.Animal}] *");
                 }
                 catch (Exception exception)
                 {
@@ -144,10 +130,6 @@ namespace WindowsFormsAppDemo
                     runtimeOutput.CDSWriteLine(exception.Message);
                 }
             }
-
-            runtimeOutput.CDSWriteLine("* Script run complete *");
-
-            return result;
         }
     }
 }

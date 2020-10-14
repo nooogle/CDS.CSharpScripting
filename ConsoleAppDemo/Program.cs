@@ -15,6 +15,7 @@ namespace ConsoleAppDemo
         {
             var menu = new (string text, Action action)[]
                 {
+                    ("EasyScript: one line demo", EasyScriptDemos.OneLineDemo),
                     ("EasyScript: hello world", EasyScriptDemos.HelloWorld),
                     ("EasyScript: compile error", EasyScriptDemos.CompileError),
                     ("EasyScript: return type", EasyScriptDemos.ReturnType),

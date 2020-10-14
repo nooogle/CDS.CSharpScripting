@@ -59,12 +59,26 @@ namespace WindowsFormsAppDemo
                 script: csharpEditorWindow.Text,
                 namespaceTypes: defaultNamespaceTypes,
                 referenceTypes: defaultReferenceTypes,
-                typeOfGlobals: null,
-                displayDiagnosticsLine: (msg) => compilationOutput.CDSWriteLine(msg));
+                typeOfGlobals: null);
+
+            DisplayCompilationOutput(compiledScript);
 
             compilationOutput.CDSWriteLine("* Compilation done *");
 
             return compiledScript;
+        }
+
+
+        private void DisplayCompilationOutput(CDS.RoslynPadScripting.CompiledScript compiledScript)
+        {
+            compilationOutput.CDSWriteLine(
+                $"{compiledScript.CompilationOutput.ErrorCount} error(s), " +
+                $"{compiledScript.CompilationOutput.WarningCount} warning(s)");
+
+            foreach (var message in compiledScript.CompilationOutput.Messages)
+            {
+                compilationOutput.CDSWriteLine(message);
+            }
         }
 
 

@@ -1,6 +1,6 @@
 ﻿namespace WindowsFormsAppDemo
 {
-    partial class FormReturnListDemo
+    partial class FormGlobalsDemo
     {
         /// <summary>
         /// Required designer variable.
@@ -141,11 +141,11 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(183, 23);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(222, 25);
+            this.label4.Size = new System.Drawing.Size(198, 25);
             this.label4.TabIndex = 6;
-            this.label4.Text = "Return list demo: TBD";
+            this.label4.Text = "Globals demo: TBD";
             // 
-            // FormReturnListDemo
+            // FormGlobalsDemo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -154,9 +154,9 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.btnRun);
             this.Margin = new System.Windows.Forms.Padding(6);
-            this.Name = "FormReturnListDemo";
-            this.Text = "FormReturnListDemo";
-            this.Load += new System.EventHandler(this.FormReturnListDemo_Load);
+            this.Name = "FormGlobalsDemo";
+            this.Text = "FormGlobalsDemo";
+            this.Load += new System.EventHandler(this.FormGlobalsDemo_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);

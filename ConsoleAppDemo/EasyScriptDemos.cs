@@ -9,6 +9,12 @@ namespace ConsoleAppDemo
 {
     public class EasyScriptDemos
     {
+        public static void OneLineDemo()
+        {
+            EasyScript<object>.Go("Console.WriteLine(\"This is a one line script demo!\");");
+        }
+
+
         public static void HelloWorld()
         {
             var scriptText = "Console.WriteLine(\"Hello console world!\");";

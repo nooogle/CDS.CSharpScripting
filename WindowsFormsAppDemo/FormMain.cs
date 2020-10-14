@@ -32,5 +32,13 @@ namespace WindowsFormsAppDemo
                 form.ShowDialog(this);
             }
         }
+
+        private void btnGlobalsDemo_Click(object sender, EventArgs e)
+        {
+            using (var form = new FormGlobalsDemo())
+            {
+                form.ShowDialog(this);
+            }
+        }
     }
 }
