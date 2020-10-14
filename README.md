@@ -11,3 +11,4 @@ Output:
 `This is a one line script demo!`
 
 
+<img src="./myimage.jpg">
