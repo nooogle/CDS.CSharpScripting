@@ -3,6 +3,7 @@ using System;
 using System.CodeDom;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,7 +24,16 @@ namespace ConsoleAppDemo
                     ("EasyScript: access host data from script", EasyScriptDemos.HostData),
                 }.ToImmutableArray();
 
+            DisplayAppNameAndVersion();
             TextMenu.Run("Main", menu);
+        }
+
+
+        private static void DisplayAppNameAndVersion()
+        {
+            var thisAppFile = typeof(Program).Assembly.Location;
+            var fileVersionInfo = FileVersionInfo.GetVersionInfo(thisAppFile);
+            Console.WriteLine($"{fileVersionInfo.ProductName} [{fileVersionInfo.ProductVersion}]");
         }
 
 

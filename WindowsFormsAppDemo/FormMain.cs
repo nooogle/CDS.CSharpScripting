@@ -40,5 +40,10 @@ namespace WindowsFormsAppDemo
                 form.ShowDialog(this);
             }
         }
+
+        private void FormMain_Load(object sender, EventArgs e)
+        {
+            Text = $"{Application.ProductName} [{Application.ProductVersion}]";
+        }
     }
 }
