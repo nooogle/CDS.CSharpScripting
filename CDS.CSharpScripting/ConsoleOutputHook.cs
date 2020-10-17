@@ -3,7 +3,7 @@ using System.IO;
 using System.Text;
 
 
-namespace CDS.RoslynPadScripting
+namespace CDS.CSharpScripting
 {
     /// <summary>
     /// Hooks the console output and redirects strings to a client-supplied

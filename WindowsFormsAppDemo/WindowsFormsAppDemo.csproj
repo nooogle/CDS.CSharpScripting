@@ -108,9 +108,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CDS.RoslynPadScripting\CDS.RoslynPadScripting.csproj">
-      <Project>{a13aaea3-5c27-44af-9b96-f0af5be5cdb8}</Project>
-      <Name>CDS.RoslynPadScripting</Name>
+    <ProjectReference Include="..\CDS.CSharpScripting\CDS.CSharpScripting.csproj">
+      <Project>{931cc421-e9a5-420b-bd21-385a3cfd9a77}</Project>
+      <Name>CDS.CSharpScripting</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="..\SharedAssemblyInfo\SharedAssemblyInfo.projitems" Label="Shared" />

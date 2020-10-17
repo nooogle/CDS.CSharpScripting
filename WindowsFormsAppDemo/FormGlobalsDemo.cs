@@ -7,21 +7,6 @@ namespace WindowsFormsAppDemo
 {
     public partial class FormGlobalsDemo : Form
     {
-        Type[] defaultReferenceTypes = new[] 
-        { 
-            typeof(int), // mscorlib
-            typeof(System.Linq.Enumerable), // System.Core
-        };
-        
-
-        Type[] defaultNamespaceTypes = new[] 
-        { 
-            typeof(int), // using System
-            typeof(System.Collections.Generic.List<int>), // using System.Collections.Generic
-            typeof(System.Linq.Enumerable), // using System.Linq
-        };
-
-
         public class Globals
         {
             /// <summary>
@@ -44,10 +29,7 @@ namespace WindowsFormsAppDemo
         {
             Cursor = Cursors.WaitCursor;
             
-            csharpEditorWindow.CDSInitialize(
-                namespaceTypes: defaultNamespaceTypes,
-                referenceTypes: defaultReferenceTypes,
-                globalsType: typeof(Globals));
+            csharpEditorWindow.CDSInitialize(globalsType: typeof(Globals));
 
             csharpEditorWindow.Text = string.Join(
                 Environment.NewLine,
@@ -76,14 +58,12 @@ namespace WindowsFormsAppDemo
         }
 
 
-        private CDS.RoslynPadScripting.CompiledScript CompileScript()
+        private CDS.CSharpScripting.CompiledScript CompileScript()
         {
             compilationOutput.CDSWriteLine("* Compiling *");
 
-            var compiledScript = CDS.RoslynPadScripting.ScriptCompiler.Compile<List<string>>(
+            var compiledScript = CDS.CSharpScripting.ScriptCompiler.Compile<List<string>>(
                 script: csharpEditorWindow.Text,
-                namespaceTypes: defaultNamespaceTypes,
-                referenceTypes: defaultReferenceTypes,
                 typeOfGlobals: typeof(Globals));
 
             DisplayCompilationOutput(compiledScript);
@@ -94,7 +74,7 @@ namespace WindowsFormsAppDemo
         }
 
 
-        private void DisplayCompilationOutput(CDS.RoslynPadScripting.CompiledScript compiledScript)
+        private void DisplayCompilationOutput(CDS.CSharpScripting.CompiledScript compiledScript)
         {
             compilationOutput.CDSWriteLine(
                 $"{compiledScript.CompilationOutput.ErrorCount} error(s), " +
@@ -107,16 +87,16 @@ namespace WindowsFormsAppDemo
         }
 
 
-        private void RunScript(CDS.RoslynPadScripting.CompiledScript compiledScript)
+        private void RunScript(CDS.CSharpScripting.CompiledScript compiledScript)
         {
             runtimeOutput.CDSWriteLine("* Running script *");
 
-            using (var console = new CDS.RoslynPadScripting.ConsoleOutputHook(msg => runtimeOutput.CDSWrite(msg)))
+            using (var console = new CDS.CSharpScripting.ConsoleOutputHook(msg => runtimeOutput.CDSWrite(msg)))
             {
 
                 try
                 {
-                    CDS.RoslynPadScripting.ScriptRunner.Run(
+                    CDS.CSharpScripting.ScriptRunner.Run(
                         compiledScript: compiledScript,
                         globals: globals);
 
