@@ -30,9 +30,9 @@
         {
             this.btnRun = new System.Windows.Forms.Button();
             this.csharpEditorWindow = new CDS.CSharpScripting.CodeEditor();
-            this.compilationOutput = new CDS.CSharpScripting.OutputWindow();
+            this.compilationOutput = new CDS.CSharpScripting.OutputPanel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.runtimeOutput = new CDS.CSharpScripting.OutputWindow();
+            this.runtimeOutput = new CDS.CSharpScripting.OutputPanel();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -169,10 +169,10 @@
 
         private System.Windows.Forms.Button btnRun;
         private CDS.CSharpScripting.CodeEditor csharpEditorWindow;
-        private CDS.CSharpScripting.OutputWindow compilationOutput;
+        private CDS.CSharpScripting.OutputPanel compilationOutput;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label label1;
-        private CDS.CSharpScripting.OutputWindow runtimeOutput;
+        private CDS.CSharpScripting.OutputPanel runtimeOutput;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label4;
