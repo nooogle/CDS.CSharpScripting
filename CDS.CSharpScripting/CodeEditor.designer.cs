@@ -35,9 +35,9 @@
             // wpfEditorHost
             // 
             this.wpfEditorHost.BackColor = System.Drawing.SystemColors.Control;
-            this.wpfEditorHost.Location = new System.Drawing.Point(3, 3);
+            this.wpfEditorHost.Location = new System.Drawing.Point(98, 135);
             this.wpfEditorHost.Name = "wpfEditorHost";
-            this.wpfEditorHost.Size = new System.Drawing.Size(200, 107);
+            this.wpfEditorHost.Size = new System.Drawing.Size(233, 123);
             this.wpfEditorHost.TabIndex = 0;
             this.wpfEditorHost.Text = "elementHost1";
             this.wpfEditorHost.Visible = false;
@@ -48,19 +48,19 @@
             this.labelNotInitialisedMsg.Dock = System.Windows.Forms.DockStyle.Fill;
             this.labelNotInitialisedMsg.Location = new System.Drawing.Point(0, 0);
             this.labelNotInitialisedMsg.Name = "labelNotInitialisedMsg";
-            this.labelNotInitialisedMsg.Size = new System.Drawing.Size(800, 450);
+            this.labelNotInitialisedMsg.Size = new System.Drawing.Size(647, 390);
             this.labelNotInitialisedMsg.TabIndex = 1;
-            this.labelNotInitialisedMsg.Text = "Code editor: not initialised";
-            this.labelNotInitialisedMsg.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelNotInitialisedMsg.Text = "// C# code editor";
             // 
-            // CSharpEditorWindow
+            // CodeEditor
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.wpfEditorHost);
             this.Controls.Add(this.labelNotInitialisedMsg);
-            this.Name = "CSharpEditorWindow";
-            this.Size = new System.Drawing.Size(800, 450);
+            this.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Name = "CodeEditor";
+            this.Size = new System.Drawing.Size(647, 390);
             this.ResumeLayout(false);
 
         }

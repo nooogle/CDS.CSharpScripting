@@ -1,6 +1,6 @@
 ﻿namespace WindowsFormsAppDemo
 {
-    partial class FormReturnListDemo
+    partial class FormRunManyDemo
     {
         /// <summary>
         /// Required designer variable.
@@ -28,21 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormReturnListDemo));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormRunManyDemo));
             this.btnRun = new System.Windows.Forms.Button();
             this.csharpEditor = new CDS.CSharpScripting.CodeEditor();
-            this.compilationOutput = new CDS.CSharpScripting.OutputPanel();
+            this.output = new CDS.CSharpScripting.OutputPanel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.runtimeOutput = new CDS.CSharpScripting.OutputPanel();
-            this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnCompile = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnRun
             // 
-            this.btnRun.Location = new System.Drawing.Point(12, 12);
+            this.btnRun.Location = new System.Drawing.Point(88, 8);
             this.btnRun.Name = "btnRun";
             this.btnRun.Size = new System.Drawing.Size(75, 23);
             this.btnRun.TabIndex = 2;
@@ -55,21 +54,22 @@
             this.csharpEditor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.csharpEditor.CDSScript = resources.GetString("csharpEditor.CDSScript");
             this.csharpEditor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.csharpEditor.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.csharpEditor.Font = new System.Drawing.Font("Consolas", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.csharpEditor.Location = new System.Drawing.Point(6, 26);
             this.csharpEditor.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.csharpEditor.Name = "csharpEditor";
-            this.csharpEditor.Size = new System.Drawing.Size(764, 156);
+            this.csharpEditor.Size = new System.Drawing.Size(764, 226);
             this.csharpEditor.TabIndex = 3;
+            this.csharpEditor.CDSScriptChanged += new System.EventHandler(this.csharpEditor_CDSScriptChanged);
             // 
-            // compilationOutput
+            // output
             // 
-            this.compilationOutput.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.compilationOutput.Location = new System.Drawing.Point(6, 214);
-            this.compilationOutput.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.compilationOutput.Name = "compilationOutput";
-            this.compilationOutput.Size = new System.Drawing.Size(764, 72);
-            this.compilationOutput.TabIndex = 4;
+            this.output.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.output.Location = new System.Drawing.Point(6, 284);
+            this.output.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.output.Name = "output";
+            this.output.Size = new System.Drawing.Size(764, 107);
+            this.output.TabIndex = 4;
             // 
             // tableLayoutPanel1
             // 
@@ -78,50 +78,28 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.runtimeOutput, 0, 5);
-            this.tableLayoutPanel1.Controls.Add(this.label3, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.csharpEditor, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.compilationOutput, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.output, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 41);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 6;
+            this.tableLayoutPanel1.RowCount = 4;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(776, 397);
             this.tableLayoutPanel1.TabIndex = 5;
             // 
-            // runtimeOutput
-            // 
-            this.runtimeOutput.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.runtimeOutput.Location = new System.Drawing.Point(6, 318);
-            this.runtimeOutput.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.runtimeOutput.Name = "runtimeOutput";
-            this.runtimeOutput.Size = new System.Drawing.Size(764, 73);
-            this.runtimeOutput.TabIndex = 6;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 292);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(79, 13);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "Runtime output";
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 188);
+            this.label2.Location = new System.Drawing.Point(3, 258);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(94, 13);
+            this.label2.Size = new System.Drawing.Size(39, 13);
             this.label2.TabIndex = 5;
-            this.label2.Text = "Compilation output";
+            this.label2.Text = "Output";
             // 
             // label1
             // 
@@ -132,16 +110,27 @@
             this.label1.TabIndex = 4;
             this.label1.Text = "Code editor";
             // 
-            // FormReturnListDemo
+            // btnCompile
+            // 
+            this.btnCompile.Location = new System.Drawing.Point(8, 8);
+            this.btnCompile.Name = "btnCompile";
+            this.btnCompile.Size = new System.Drawing.Size(75, 23);
+            this.btnCompile.TabIndex = 6;
+            this.btnCompile.Text = "Compile";
+            this.btnCompile.UseVisualStyleBackColor = true;
+            this.btnCompile.Click += new System.EventHandler(this.btnCompile_Click);
+            // 
+            // FormRunManyDemo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnCompile);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.btnRun);
-            this.Name = "FormReturnListDemo";
-            this.Text = "FormReturnListDemo";
-            this.Load += new System.EventHandler(this.FormReturnListDemo_Load);
+            this.Name = "FormRunManyDemo";
+            this.Text = "FormCustomDemo";
+            this.Load += new System.EventHandler(this.FormCustomDemo_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
@@ -152,11 +141,10 @@
 
         private System.Windows.Forms.Button btnRun;
         private CDS.CSharpScripting.CodeEditor csharpEditor;
-        private CDS.CSharpScripting.OutputPanel compilationOutput;
+        private CDS.CSharpScripting.OutputPanel output;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label label1;
-        private CDS.CSharpScripting.OutputPanel runtimeOutput;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btnCompile;
     }
 }

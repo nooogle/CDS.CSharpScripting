@@ -117,4 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="csharpEditor.CDSScript" xml:space="preserve">
+    <value>using System.Drawing;
+
+
+// Both the code editor and the script compiler have been told to
+// reference the assembly that provides System.Drawing.Point (the 
+// System.Drawing.dll assembly).
+// 
+// But we haven't told the editor or compiler to automatically
+// make the System.Drawing namespace available to the script.
+// 
+// Therefore, to use drawing types we need the 'using System.Drawing';
+// statement at the top of this script, or we can use an explicit 
+// namespace.
+
+Point p = Point.Empty;
+System.Drawing.Rectangle r = new System.Drawing.Rectangle(1, 2, 3, 4);</value>
+  </data>
 </root>

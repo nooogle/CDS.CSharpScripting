@@ -39,16 +39,17 @@
             this.textBox.Multiline = true;
             this.textBox.Name = "textBox";
             this.textBox.ReadOnly = true;
+            this.textBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.textBox.Size = new System.Drawing.Size(1600, 865);
             this.textBox.TabIndex = 0;
             // 
-            // OutputWindow
+            // OutputPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.textBox);
             this.Margin = new System.Windows.Forms.Padding(6);
-            this.Name = "OutputWindow";
+            this.Name = "OutputPanel";
             this.Size = new System.Drawing.Size(1600, 865);
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -28,17 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.btnBasicDemo = new System.Windows.Forms.Button();
             this.btnReturnListDemo = new System.Windows.Forms.Button();
             this.btnGlobalsDemo = new System.Windows.Forms.Button();
+            this.btnNonDefaultTypes = new System.Windows.Forms.Button();
+            this.btnRunMany = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnBasicDemo
             // 
-            this.btnBasicDemo.Location = new System.Drawing.Point(58, 58);
-            this.btnBasicDemo.Margin = new System.Windows.Forms.Padding(6);
+            this.btnBasicDemo.Location = new System.Drawing.Point(12, 12);
             this.btnBasicDemo.Name = "btnBasicDemo";
-            this.btnBasicDemo.Size = new System.Drawing.Size(184, 113);
+            this.btnBasicDemo.Size = new System.Drawing.Size(92, 59);
             this.btnBasicDemo.TabIndex = 3;
             this.btnBasicDemo.Text = "Basic";
             this.btnBasicDemo.UseVisualStyleBackColor = true;
@@ -46,10 +53,9 @@
             // 
             // btnReturnListDemo
             // 
-            this.btnReturnListDemo.Location = new System.Drawing.Point(58, 205);
-            this.btnReturnListDemo.Margin = new System.Windows.Forms.Padding(6);
+            this.btnReturnListDemo.Location = new System.Drawing.Point(12, 77);
             this.btnReturnListDemo.Name = "btnReturnListDemo";
-            this.btnReturnListDemo.Size = new System.Drawing.Size(184, 113);
+            this.btnReturnListDemo.Size = new System.Drawing.Size(92, 59);
             this.btnReturnListDemo.TabIndex = 4;
             this.btnReturnListDemo.Text = "Return list";
             this.btnReturnListDemo.UseVisualStyleBackColor = true;
@@ -57,26 +63,93 @@
             // 
             // btnGlobalsDemo
             // 
-            this.btnGlobalsDemo.Location = new System.Drawing.Point(58, 347);
-            this.btnGlobalsDemo.Margin = new System.Windows.Forms.Padding(6);
+            this.btnGlobalsDemo.Location = new System.Drawing.Point(12, 142);
             this.btnGlobalsDemo.Name = "btnGlobalsDemo";
-            this.btnGlobalsDemo.Size = new System.Drawing.Size(184, 113);
+            this.btnGlobalsDemo.Size = new System.Drawing.Size(92, 59);
             this.btnGlobalsDemo.TabIndex = 5;
             this.btnGlobalsDemo.Text = "Globals";
             this.btnGlobalsDemo.UseVisualStyleBackColor = true;
             this.btnGlobalsDemo.Click += new System.EventHandler(this.btnGlobalsDemo_Click);
             // 
+            // btnNonDefaultTypes
+            // 
+            this.btnNonDefaultTypes.Location = new System.Drawing.Point(12, 207);
+            this.btnNonDefaultTypes.Name = "btnNonDefaultTypes";
+            this.btnNonDefaultTypes.Size = new System.Drawing.Size(92, 59);
+            this.btnNonDefaultTypes.TabIndex = 6;
+            this.btnNonDefaultTypes.Text = "Non-default types";
+            this.btnNonDefaultTypes.UseVisualStyleBackColor = true;
+            this.btnNonDefaultTypes.Click += new System.EventHandler(this.btnbtnNonDefaultTypes_Click);
+            // 
+            // btnRunMany
+            // 
+            this.btnRunMany.Location = new System.Drawing.Point(12, 272);
+            this.btnRunMany.Name = "btnRunMany";
+            this.btnRunMany.Size = new System.Drawing.Size(92, 59);
+            this.btnRunMany.TabIndex = 7;
+            this.btnRunMany.Text = "Run many";
+            this.btnRunMany.UseVisualStyleBackColor = true;
+            this.btnRunMany.Click += new System.EventHandler(this.btnRunMany_Click);
+            // 
+            // label1
+            // 
+            this.label1.Location = new System.Drawing.Point(110, 12);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(376, 59);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "Simple demo. ";
+            // 
+            // label2
+            // 
+            this.label2.Location = new System.Drawing.Point(110, 77);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(376, 59);
+            this.label2.TabIndex = 9;
+            this.label2.Text = "The host expects to get data back fro the script of a specific data type.";
+            // 
+            // label3
+            // 
+            this.label3.Location = new System.Drawing.Point(110, 142);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(376, 59);
+            this.label3.TabIndex = 10;
+            this.label3.Text = "The host shares an instance of a class with the script. Both the script and the h" +
+    "ost can access the same shared data.";
+            // 
+            // label4
+            // 
+            this.label4.Location = new System.Drawing.Point(110, 207);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(376, 59);
+            this.label4.TabIndex = 11;
+            this.label4.Text = resources.GetString("label4.Text");
+            // 
+            // label5
+            // 
+            this.label5.Location = new System.Drawing.Point(110, 272);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(376, 59);
+            this.label5.TabIndex = 12;
+            this.label5.Text = "Splits compilation from execution. Also shows the use of static data which is per" +
+    "sisted between executions of the script (but is reset after recompiling).";
+            // 
             // FormMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1030, 531);
+            this.ClientSize = new System.Drawing.Size(497, 351);
             this.ControlBox = false;
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.btnRunMany);
+            this.Controls.Add(this.btnNonDefaultTypes);
             this.Controls.Add(this.btnGlobalsDemo);
             this.Controls.Add(this.btnReturnListDemo);
             this.Controls.Add(this.btnBasicDemo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "FormMain";
             this.Text = "FormMain";
             this.Load += new System.EventHandler(this.FormMain_Load);
@@ -89,5 +162,12 @@
         private System.Windows.Forms.Button btnBasicDemo;
         private System.Windows.Forms.Button btnReturnListDemo;
         private System.Windows.Forms.Button btnGlobalsDemo;
+        private System.Windows.Forms.Button btnNonDefaultTypes;
+        private System.Windows.Forms.Button btnRunMany;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
     }
 }

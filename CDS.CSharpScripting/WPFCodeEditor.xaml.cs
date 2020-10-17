@@ -20,6 +20,9 @@ namespace CDS.CSharpScripting
     /// </summary>
     public partial class WPFCodeEditor : UserControl
     {
+        /// <summary>
+        /// TBD
+        /// </summary>
         public WPFCodeEditor()
         {
             InitializeComponent();

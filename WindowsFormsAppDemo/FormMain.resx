@@ -117,4 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="label4.Text" xml:space="preserve">
+    <value>Most demos use the simplest initialisation methods which means a pre-arranged set of types are available. This demo shows how to control exactly which namespaces and references are available to the script.</value>
+  </data>
 </root>

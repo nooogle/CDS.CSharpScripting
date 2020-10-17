@@ -19,7 +19,7 @@ namespace CDS.CSharpScripting
     /// <summary>
     /// Editor control for C#, pre-configured with keywords, dark theme, etc.
     /// </summary>
-    public partial class CodeEditor: UserControl
+    public partial class CodeEditor : UserControl
     {
         /// <summary>
         /// Delete an unmanaged object
@@ -29,24 +29,30 @@ namespace CDS.CSharpScripting
         public static extern bool DeleteObject([In] IntPtr hObject);
 
 
-        RoslynCodeEditor editor;
-        bool isInitialised;
+        private const string CDSPropertyCategory = "CDS";
+        private RoslynCodeEditor editor;
+        private bool isInitialised;
+        bool supressTextChangedEvent;
 
 
         /// <inheritdoc/>
-        [EditorBrowsable(EditorBrowsableState.Always)]
-        [Browsable(true)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
-        [Bindable(true)]
-        public override string Text
+        [Description("The C# script")]
+        [Category(CDSPropertyCategory)]
+        [Editor(typeof(System.ComponentModel.Design.MultilineStringEditor), typeof(System.Drawing.Design.UITypeEditor))]
+        [SettingsBindable(true)]
+        public string CDSScript
         {
-            get => isInitialised ? editor.Document.Text : "";
+            get => isInitialised ? editor.Document.Text : labelNotInitialisedMsg.Text;
 
             set
             {
                 if (isInitialised)
                 {
                     editor.Document.Text = value;
+                }
+                else
+                {
+                    labelNotInitialisedMsg.Text = value;
                 }
             }
         }
@@ -55,9 +61,9 @@ namespace CDS.CSharpScripting
         /// <summary>
         /// Fired when the text changes
         /// </summary>
-        [Browsable(true)]
-        [EditorBrowsable(EditorBrowsableState.Always)]
-        public new event EventHandler TextChanged;
+        [Description("Fired when the script changes")]
+        [Category(CDSPropertyCategory)]
+        public event EventHandler CDSScriptChanged;
 
 
         /// <summary>
@@ -140,8 +146,17 @@ namespace CDS.CSharpScripting
                 namespaceTypesIncludingGlobalsType);
 
             CreateNewEditor(roslynHost);
+            TransferScriptFromTempStoreToEditor();
 
             isInitialised = true;
+        }
+
+
+        private void TransferScriptFromTempStoreToEditor()
+        {
+            supressTextChangedEvent = true;
+            editor.Text = labelNotInitialisedMsg.Text;
+            supressTextChangedEvent = false;
         }
 
 
@@ -240,6 +255,7 @@ namespace CDS.CSharpScripting
         {
             if(!isInitialised) { return; }
 
+            TransferScriptFromEditorToTempStore();
             labelNotInitialisedMsg.Visible = true;
             wpfEditorHost.Visible = false;
 
@@ -250,13 +266,21 @@ namespace CDS.CSharpScripting
             isInitialised = false;
         }
 
+        private void TransferScriptFromEditorToTempStore()
+        {
+            labelNotInitialisedMsg.Text = editor.Text;
+        }
+
 
         /// <summary>
         /// The text has changed - fire up to the owner
         /// </summary>
         private void Editor_TextChanged(object sender, EventArgs e)
         {
-            TextChanged?.Invoke(sender, e);
+            if (!supressTextChangedEvent)
+            {
+                CDSScriptChanged?.Invoke(sender, e);
+            }
         }
     }
 }

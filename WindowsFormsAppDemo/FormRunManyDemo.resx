@@ -118,9 +118,17 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="csharpEditor.CDSScript" xml:space="preserve">
-    <value>// using clauses and references are not required; this demo programatically
-// configured both the editor and script compiler with the appropriate types
-var myList = new[] { "A", "B" }.ToList();
-return myList;</value>
+    <value>// The value of x will default to 10 each time the script runs.
+// The value of y will defualt to 20 each time the script compiles; the
+// value will be retained each time the script runs. Run the script 
+// several times to see the value of y increasing. Compiled the script
+// and then run again to see the value of y reset back to 20.
+int x = 10;
+static int y = 20;
+
+x++;
+y++;
+Console.WriteLine($"x = {x}");
+Console.WriteLine($"y = {y}");</value>
   </data>
 </root>

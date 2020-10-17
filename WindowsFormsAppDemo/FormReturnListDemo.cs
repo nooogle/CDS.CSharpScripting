@@ -16,16 +16,7 @@ namespace WindowsFormsAppDemo
         private void FormReturnListDemo_Load(object sender, EventArgs e)
         {
             Cursor = Cursors.WaitCursor;
-            
-            csharpEditorWindow.CDSInitialize();
-
-            csharpEditorWindow.Text = string.Join(
-                Environment.NewLine,
-                "// using clauses and references are not required; this demo programatically",
-                "// configured both the editor and script compiler with the appropriate types",
-                "var myList = new[] { \"A\", \"B\" }.ToList();",
-                "return myList;");
-
+            csharpEditor.CDSInitialize();
             Cursor = Cursors.Default;
         }
 
@@ -77,7 +68,7 @@ namespace WindowsFormsAppDemo
             compilationOutput.CDSWriteLine("* Compiling *");
 
             var compiledScript = CDS.CSharpScripting.ScriptCompiler.Compile<List<string>>(
-                script: csharpEditorWindow.Text,
+                script: csharpEditor.CDSScript,
                 typeOfGlobals: null);
 
 

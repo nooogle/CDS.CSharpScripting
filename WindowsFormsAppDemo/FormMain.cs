@@ -45,5 +45,21 @@ namespace WindowsFormsAppDemo
         {
             Text = $"{Application.ProductName} [{Application.ProductVersion}]";
         }
+
+        private void btnbtnNonDefaultTypes_Click(object sender, EventArgs e)
+        {
+            using(var form = new FormNonDefaultTypesDemo())
+            {
+                form.ShowDialog(this);
+            }
+        }
+
+        private void btnRunMany_Click(object sender, EventArgs e)
+        {
+            using (var form = new FormRunManyDemo())
+            {
+                form.ShowDialog(this);
+            }
+        }
     }
 }

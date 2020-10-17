@@ -28,17 +28,7 @@ namespace WindowsFormsAppDemo
         private void FormGlobalsDemo_Load(object sender, EventArgs e)
         {
             Cursor = Cursors.WaitCursor;
-            
-            csharpEditorWindow.CDSInitialize(globalsType: typeof(Globals));
-
-            csharpEditorWindow.Text = string.Join(
-                Environment.NewLine,
-                "// The public methods and properties of the Global class instance are",
-                "// directly available in this script",
-                "Console.WriteLine(Animal);",
-                "Animal = \"Shark\";",
-                "Console.WriteLine(Animal);");
-
+            csharpEditor.CDSInitialize(globalsType: typeof(Globals));
             Cursor = Cursors.Default;
         }
 
@@ -63,7 +53,7 @@ namespace WindowsFormsAppDemo
             compilationOutput.CDSWriteLine("* Compiling *");
 
             var compiledScript = CDS.CSharpScripting.ScriptCompiler.Compile<List<string>>(
-                script: csharpEditorWindow.Text,
+                script: csharpEditor.CDSScript,
                 typeOfGlobals: typeof(Globals));
 
             DisplayCompilationOutput(compiledScript);

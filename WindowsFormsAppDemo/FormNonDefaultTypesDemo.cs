@@ -4,18 +4,36 @@ using System.Windows.Forms;
 
 namespace WindowsFormsAppDemo
 {
-    public partial class FormBasicDemo : Form
+    public partial class FormNonDefaultTypesDemo : Form
     {
-        public FormBasicDemo()
+        private Type[] namespaceTypes = new[]
+{
+            typeof(int), // using System;
+        };
+
+
+        private Type[] referenceTypes = new[]
+        {
+            typeof(int), // mscorlib.dll
+            typeof(System.Drawing.Point), // System.Drawing.dll
+        };
+
+
+        public FormNonDefaultTypesDemo()
         {
             InitializeComponent();
         }
 
 
-        private void FormBasicDemo_Load(object sender, EventArgs e)
+        private void FormNonDefaultTypesDemo_Load(object sender, EventArgs e)
         {
             Cursor = Cursors.WaitCursor;
-            csharpEditor.CDSInitialize();
+
+            csharpEditor.CDSInitialize(
+                namespaceTypes: namespaceTypes,
+                referenceTypes: referenceTypes,
+                globalsType: null);
+            
             Cursor = Cursors.Default;
         }
 
