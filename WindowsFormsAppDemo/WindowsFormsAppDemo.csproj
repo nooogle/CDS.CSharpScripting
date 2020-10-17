@@ -47,6 +47,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommonScriptUtils.cs" />
+    <Compile Include="FormCustomDemo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormCustomDemo.Designer.cs">
+      <DependentUpon>FormCustomDemo.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormGlobalsDemo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -73,6 +79,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FormCustomDemo.resx">
+      <DependentUpon>FormCustomDemo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormGlobalsDemo.resx">
       <DependentUpon>FormGlobalsDemo.cs</DependentUpon>
     </EmbeddedResource>

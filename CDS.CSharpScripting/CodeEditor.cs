@@ -7,7 +7,12 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices;
+using System.Windows;
 using System.Windows.Forms;
+using System.Windows.Interop;
+using System.Windows.Media.Imaging;
+
 
 namespace CDS.CSharpScripting
 {
@@ -16,6 +21,14 @@ namespace CDS.CSharpScripting
     /// </summary>
     public partial class CodeEditor: UserControl
     {
+        /// <summary>
+        /// Delete an unmanaged object
+        /// </summary>
+        [DllImport("gdi32.dll", EntryPoint = "DeleteObject")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool DeleteObject([In] IntPtr hObject);
+
+
         RoslynCodeEditor editor;
         bool isInitialised;
 
@@ -142,6 +155,21 @@ namespace CDS.CSharpScripting
                 highlightColors: new ClassificationHighlightColors(),
                 workingDirectory: workingDirectory,
                 documentText: "");
+
+            editor.IsBraceCompletionEnabled = true;
+
+            // This causes the light bulb to appear but the context menu doesn't
+            // seem to work properly...
+
+            var handle = Properties.Resource.IntellisenseLightBulb_16x.GetHbitmap();
+
+            editor.ContextActionsIcon = Imaging.CreateBitmapSourceFromHBitmap(
+                handle,
+                IntPtr.Zero,
+                Int32Rect.Empty,
+                BitmapSizeOptions.FromEmptyOptions());
+
+            DeleteObject(handle);
 
             editor.SyntaxHighlighting = HighlightingManager.Instance.GetDefinition("C#");
             editor.FontFamily = new System.Windows.Media.FontFamily(this.Font.FontFamily.Name);
