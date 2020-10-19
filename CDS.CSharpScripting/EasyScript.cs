@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 namespace CDS.CSharpScripting
 {
     /// <summary>
-    /// TBD
+    /// The data type that the script is expected to return. Use object if
+    /// a return value is not required.
     /// </summary>
     /// <typeparam name="ReturnType"></typeparam>
     public class EasyScript<ReturnType>
@@ -86,10 +87,13 @@ namespace CDS.CSharpScripting
 
 
         /// <summary>
-        /// TBD
+        /// Compile and run the script.
         /// </summary>
-        /// <param name="script"></param>
-        /// <returns></returns>
+        /// <param name="script">A C# script.</param>
+        /// <returns>
+        /// An <see cref="EasyScript{ReturnType}"/> instance, providing details of the
+        /// compilation and [optional] script results.
+        /// </returns>
         public static EasyScript<ReturnType> Go(string script)
         {
             return Go(
@@ -99,11 +103,17 @@ namespace CDS.CSharpScripting
 
 
         /// <summary>
-        /// TBD
+        /// Compile and run the script.
         /// </summary>
-        /// <param name="script"></param>
-        /// <param name="globals"></param>
-        /// <returns></returns>
+        /// <param name="script">A C# script.</param>
+        /// <param name="globals">
+        /// An instance of some global data object. The script will be able to access public 
+        /// properties and methods in this class.
+        /// </param>
+        /// <returns>
+        /// An <see cref="EasyScript{ReturnType}"/> instance, providing details of the
+        /// compilation and [optional] script results.
+        /// </returns>
         public static EasyScript<ReturnType> Go(string script, object globals)
         {
             var globalsType =

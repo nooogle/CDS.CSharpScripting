@@ -35,14 +35,19 @@ namespace CDS.CSharpScripting
         bool supressTextChangedEvent;
 
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// The C# script.
+        /// </summary>
+        /// <remarks>
+        /// Note: we use the label to store the script if the RoslynPad editor hasn't been created yet.
+        /// </remarks>
         [Description("The C# script")]
         [Category(CDSPropertyCategory)]
         [Editor(typeof(System.ComponentModel.Design.MultilineStringEditor), typeof(System.Drawing.Design.UITypeEditor))]
         [SettingsBindable(true)]
         public string CDSScript
         {
-            get => isInitialised ? editor.Document.Text : labelNotInitialisedMsg.Text;
+            get => isInitialised ? editor.Document.Text : labelTempScript.Text;
 
             set
             {
@@ -52,7 +57,7 @@ namespace CDS.CSharpScripting
                 }
                 else
                 {
-                    labelNotInitialisedMsg.Text = value;
+                    labelTempScript.Text = value;
                 }
             }
         }
@@ -76,9 +81,8 @@ namespace CDS.CSharpScripting
 
 
         /// <summary>
-        /// Initialise: hides the 'not initialised' message then creates, configures
-        /// and shows a Roslyn code editor. A default set of namespaces and assemblies
-        /// are automatically used.
+        /// Initialise: configures and shows a Roslyn code editor. 
+        /// A default set of namespaces and assemblies are automatically used.
         /// </summary>
         public void CDSInitialize()
         {
@@ -87,9 +91,8 @@ namespace CDS.CSharpScripting
 
 
         /// <summary>
-        /// Initialise: hides the 'not initialised' message then creates, configures
-        /// and shows a Roslyn code editor. A default set of namespaces and assemblies
-        /// are automatically used.
+        /// Initialise: configures and shows a Roslyn code editor. 
+        /// A default set of namespaces and assemblies are automatically used.
         /// </summary>
         /// <param name="globalsType">
         /// Optional (can be null): the type of a global variable made available to the
@@ -105,8 +108,7 @@ namespace CDS.CSharpScripting
 
 
         /// <summary>
-        /// Initialise: hides the 'not initialised' message then creates, configures
-        /// and shows a Roslyn code editor.
+        /// Initialise: configures and shows a Roslyn code editor.
         /// </summary>
         /// <param name="referenceTypes">
         /// The assembly for each type in this list is referenced by the editor session.
@@ -155,7 +157,7 @@ namespace CDS.CSharpScripting
         private void TransferScriptFromTempStoreToEditor()
         {
             supressTextChangedEvent = true;
-            editor.Text = labelNotInitialisedMsg.Text;
+            editor.Text = labelTempScript.Text;
             supressTextChangedEvent = false;
         }
 
@@ -192,7 +194,7 @@ namespace CDS.CSharpScripting
             editor.TextChanged += Editor_TextChanged;
             wpfEditorHost.Dock = DockStyle.Fill;
             wpfEditorHost.Visible = true;
-            labelNotInitialisedMsg.Visible = false;
+            labelTempScript.Visible = false;
             wpfEditorHost.Child = editor;
         }
 
@@ -245,8 +247,7 @@ namespace CDS.CSharpScripting
 
 
         /// <summary>
-        /// Uninitialise: shows the 'not initialised' message and closes down the
-        /// Roslyn code editor.
+        /// Uninitialise: closes the editor; the script remains visible on a read-only display.
         /// </summary>
         /// <remarks>
         /// Does nothing if not already initialised.
@@ -256,7 +257,7 @@ namespace CDS.CSharpScripting
             if(!isInitialised) { return; }
 
             TransferScriptFromEditorToTempStore();
-            labelNotInitialisedMsg.Visible = true;
+            labelTempScript.Visible = true;
             wpfEditorHost.Visible = false;
 
             editor.TextChanged -= Editor_TextChanged;
@@ -266,9 +267,10 @@ namespace CDS.CSharpScripting
             isInitialised = false;
         }
 
+
         private void TransferScriptFromEditorToTempStore()
         {
-            labelNotInitialisedMsg.Text = editor.Text;
+            labelTempScript.Text = editor.Text;
         }
 
 
