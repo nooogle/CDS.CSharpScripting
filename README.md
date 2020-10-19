@@ -1,5 +1,12 @@
-# CDS.RoslynPadScripting
-Drop-in user control for C# editing with intellisense and compilation, and script compile and run support.
+# CDS.CSharpScripting
+1. C# code editor
+2. Script compilation and execution
+
+The code editor is a simplified wrapper around the amazing [RoslynPad C# WPF](https://github.com/aelij/RoslynPad) code editor, via the RoslynPad.Roslyn.Windows NuGet pacakge.
+
+Compilation and execution is built around Microsoft's open-source .Net compiler platform
+known as [Roslyn](https://en.wikipedia.org/wiki/Roslyn_(compiler)), available from 
+the Microsoft.CSharp package on NuGet.
 
 ## Overview
 
