@@ -39,22 +39,9 @@ namespace WindowsFormsAppDemo
         {
             compilationOutput.CDSWriteLine("* Compiling *");
             var compiledScript = ScriptCompiler.Compile(script: csharpEditor.CDSScript);
-            DisplayCompilationOutput(compiledScript);
+            Common.DisplayCompilationOutput(compilationOutput, compiledScript);
             compilationOutput.CDSWriteLine("* Compilation done *");
             return compiledScript;
-        }
-
-
-        private void DisplayCompilationOutput(CompiledScript compiledScript)
-        {
-            compilationOutput.CDSWriteLine(
-                $"{compiledScript.CompilationOutput.ErrorCount} error(s), " +
-                $"{compiledScript.CompilationOutput.WarningCount} warning(s)");
-
-            foreach (var message in compiledScript.CompilationOutput.Messages)
-            {
-                compilationOutput.CDSWriteLine(message);
-            }
         }
 
 
@@ -68,18 +55,23 @@ namespace WindowsFormsAppDemo
                 {
                     ScriptRunner.Run(
                         compiledScript: compiledScript,
-                        globals: null);
+                        globals: null);                    
                 }
                 catch (Exception exception)
                 {
-                    runtimeOutput.CDSWriteLine("");
-                    runtimeOutput.CDSWriteLine("Exception caught while running the script");
-                    runtimeOutput.CDSWriteLine("");
-                    runtimeOutput.CDSWriteLine(exception.Message);
+                    Common.SendExceptionToOutput(
+                        runtimeOutput,
+                        "Exception caught while running the script",
+                        exception);
                 }
             }
 
             runtimeOutput.CDSWriteLine("* Script run complete *");
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }

@@ -53,7 +53,7 @@ namespace WindowsFormsAppDemo
             compiledScript = CDS.CSharpScripting.ScriptCompiler.Compile<List<string>>(
                 script: csharpEditor.CDSScript);
 
-            DisplayCompilationOutput();
+            Common.DisplayCompilationOutput(output, compiledScript);
 
             output.CDSWriteLine("* Compilation done *");
         }
@@ -74,24 +74,11 @@ namespace WindowsFormsAppDemo
                 }
                 catch (Exception exception)
                 {
-                    output.CDSWriteLine("");
-                    output.CDSWriteLine("Exception caught while running the script");
-                    output.CDSWriteLine("");
-                    output.CDSWriteLine(exception.Message);
+                    Common.SendExceptionToOutput(
+                        output,
+                        "Exception caught while running the script",
+                        exception);
                 }
-            }
-        }
-
-
-        private void DisplayCompilationOutput()
-        {
-            output.CDSWriteLine(
-                $"{compiledScript.CompilationOutput.ErrorCount} error(s), " +
-                $"{compiledScript.CompilationOutput.WarningCount} warning(s)");
-
-            foreach (var message in compiledScript.CompilationOutput.Messages)
-            {
-                output.CDSWriteLine(message);
             }
         }
 

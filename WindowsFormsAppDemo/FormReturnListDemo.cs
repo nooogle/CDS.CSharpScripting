@@ -72,24 +72,11 @@ namespace WindowsFormsAppDemo
                 typeOfGlobals: null);
 
 
-            DisplayCompilationOutput(compiledScript);
+            Common.DisplayCompilationOutput(compilationOutput, compiledScript);
 
             compilationOutput.CDSWriteLine("* Compilation done *");
 
             return compiledScript;
-        }
-
-
-        private void DisplayCompilationOutput(CDS.CSharpScripting.CompiledScript compiledScript)
-        {
-            compilationOutput.CDSWriteLine(
-                $"{compiledScript.CompilationOutput.ErrorCount} error(s), " +
-                $"{compiledScript.CompilationOutput.WarningCount} warning(s)");
-
-            foreach (var message in compiledScript.CompilationOutput.Messages)
-            {
-                compilationOutput.CDSWriteLine(message);
-            }
         }
 
 
@@ -109,10 +96,10 @@ namespace WindowsFormsAppDemo
                 }
                 catch (Exception exception)
                 {
-                    runtimeOutput.CDSWriteLine("");
-                    runtimeOutput.CDSWriteLine("Exception caught while running the script");
-                    runtimeOutput.CDSWriteLine("");
-                    runtimeOutput.CDSWriteLine(exception.Message);
+                    Common.SendExceptionToOutput(
+                        runtimeOutput,
+                        "Exception caught while running the script",
+                        exception);
                 }
             }
 

@@ -37,7 +37,6 @@
         /// <param name="globals">Instance of the Globals type passed into <see cref="ScriptCompiler.Compile{ReturnType}(string, System.Type[], System.Type[], System.Type)"/>, or null if not required.</param>
         public static ReturnType Run<ReturnType>(CompiledScript compiledScript, object globals)
         {
-
             var runTask = compiledScript.ActualScript.RunAsync(globals);
             runTask.Wait();
             var returnValue = (ReturnType)runTask.Result.ReturnValue;

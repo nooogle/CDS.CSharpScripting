@@ -46,7 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommonScriptUtils.cs" />
+    <Compile Include="Common.cs" />
     <Compile Include="FormNonDefaultTypesDemo.cs">
       <SubType>Form</SubType>
     </Compile>
