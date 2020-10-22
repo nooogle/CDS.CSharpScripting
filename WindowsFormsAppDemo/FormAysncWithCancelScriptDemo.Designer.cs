@@ -1,6 +1,6 @@
 ﻿namespace WindowsFormsAppDemo
 {
-    partial class FormRunManyDemo
+    partial class FormAysncWithCancelScriptDemo
     {
         /// <summary>
         /// Required designer variable.
@@ -28,26 +28,27 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormRunManyDemo));
-            this.btnRun = new System.Windows.Forms.Button();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAysncWithCancelScriptDemo));
+            this.btnRunAsync = new System.Windows.Forms.Button();
             this.csharpEditor = new CDS.CSharpScripting.CodeEditor();
             this.output = new CDS.CSharpScripting.OutputPanel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.btnCompile = new System.Windows.Forms.Button();
+            this.btnStopScript = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // btnRun
+            // btnRunAsync
             // 
-            this.btnRun.Location = new System.Drawing.Point(88, 8);
-            this.btnRun.Name = "btnRun";
-            this.btnRun.Size = new System.Drawing.Size(75, 23);
-            this.btnRun.TabIndex = 2;
-            this.btnRun.Text = "Run";
-            this.btnRun.UseVisualStyleBackColor = true;
-            this.btnRun.Click += new System.EventHandler(this.btnRun_Click);
+            this.btnRunAsync.Location = new System.Drawing.Point(88, 8);
+            this.btnRunAsync.Name = "btnRunAsync";
+            this.btnRunAsync.Size = new System.Drawing.Size(75, 23);
+            this.btnRunAsync.TabIndex = 2;
+            this.btnRunAsync.Text = "Run async";
+            this.btnRunAsync.UseVisualStyleBackColor = true;
+            this.btnRunAsync.Click += new System.EventHandler(this.btnRunAsync_Click);
             // 
             // csharpEditor
             // 
@@ -56,7 +57,7 @@
             this.csharpEditor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.csharpEditor.Font = new System.Drawing.Font("Consolas", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.csharpEditor.Location = new System.Drawing.Point(6, 26);
-            this.csharpEditor.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.csharpEditor.Margin = new System.Windows.Forms.Padding(6);
             this.csharpEditor.Name = "csharpEditor";
             this.csharpEditor.Size = new System.Drawing.Size(764, 226);
             this.csharpEditor.TabIndex = 3;
@@ -66,7 +67,7 @@
             // 
             this.output.Dock = System.Windows.Forms.DockStyle.Fill;
             this.output.Location = new System.Drawing.Point(6, 284);
-            this.output.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.output.Margin = new System.Windows.Forms.Padding(6);
             this.output.Name = "output";
             this.output.Size = new System.Drawing.Size(764, 107);
             this.output.TabIndex = 4;
@@ -120,17 +121,28 @@
             this.btnCompile.UseVisualStyleBackColor = true;
             this.btnCompile.Click += new System.EventHandler(this.btnCompile_Click);
             // 
-            // FormRunManyDemo
+            // btnStopScript
+            // 
+            this.btnStopScript.Location = new System.Drawing.Point(169, 8);
+            this.btnStopScript.Name = "btnStopScript";
+            this.btnStopScript.Size = new System.Drawing.Size(75, 23);
+            this.btnStopScript.TabIndex = 7;
+            this.btnStopScript.Text = "Stop script";
+            this.btnStopScript.UseVisualStyleBackColor = true;
+            this.btnStopScript.Click += new System.EventHandler(this.btnStopScript_Click);
+            // 
+            // FormCancelScriptDemo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnStopScript);
             this.Controls.Add(this.btnCompile);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Controls.Add(this.btnRun);
-            this.Name = "FormRunManyDemo";
-            this.Text = "FormRunManyDemo";
-            this.Load += new System.EventHandler(this.FormCustomDemo_Load);
+            this.Controls.Add(this.btnRunAsync);
+            this.Name = "FormAysncWithCancelScriptDemo";
+            this.Text = "FormAysncWithCancelScriptDemo";
+            this.Load += new System.EventHandler(this.FormAysncWithCancelScriptDemo_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
@@ -139,12 +151,13 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btnRun;
+        private System.Windows.Forms.Button btnRunAsync;
         private CDS.CSharpScripting.CodeEditor csharpEditor;
         private CDS.CSharpScripting.OutputPanel output;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnCompile;
+        private System.Windows.Forms.Button btnStopScript;
     }
 }

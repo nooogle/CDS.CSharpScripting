@@ -22,6 +22,7 @@ namespace ConsoleAppDemo
                     ("EasyScript: return type", EasyScriptDemos.ReturnType),
                     ("EasyScript: enter your own!", EasyScriptDemos.EnterYourOwn),
                     ("EasyScript: access host data from script", EasyScriptDemos.HostData),
+                    ("EasyScript: async with cancellation", EasyScriptAsync.Run),
                 }.ToImmutableArray();
 
             DisplayAppNameAndVersion();

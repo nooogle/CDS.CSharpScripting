@@ -29,7 +29,14 @@ namespace CDS.CSharpScripting
         /// </summary>
         public void CDSClear()
         {
-            textBox.Clear();
+            if (InvokeRequired)
+            {
+                BeginInvoke((MethodInvoker)delegate { CDSClear(); });
+            }
+            else
+            {
+                textBox.Clear();
+            }
         }
 
 
@@ -38,7 +45,14 @@ namespace CDS.CSharpScripting
         /// </summary>
         public void CDSWrite(string text)
         {
-            textBox.AppendText(text);
+            if (InvokeRequired)
+            {
+                BeginInvoke((MethodInvoker)delegate { CDSWrite(text); });
+            }
+            else
+            {
+                textBox.AppendText(text);
+            }
         }
 
 

@@ -32,9 +32,9 @@ namespace CDS.CSharpScripting
         /// True if the script compiled without errors or warnings and the 
         /// execution completed without exceptions
         /// </summary>
-        public bool AllOk => 
-            (RuntimeException == null) && 
-            (CompilationOutput.WarningCount == 0) && 
+        public bool AllOk =>
+            (RuntimeException == null) &&
+            (CompilationOutput.WarningCount == 0) &&
             (CompilationOutput.ErrorCount == 0);
 
 
@@ -47,7 +47,7 @@ namespace CDS.CSharpScripting
             {
                 string summary;
 
-                if(AllOk)
+                if (AllOk)
                 {
                     summary = "All ok!";
                 }
@@ -57,14 +57,14 @@ namespace CDS.CSharpScripting
                         $"Detected {CompilationOutput.WarningCount} warning(s), " +
                         $"{CompilationOutput.ErrorCount} error(s), ";
 
-                    if(RuntimeException == null)
+                    if (RuntimeException == null)
                     {
                         summary += "no runtime exception";
                     }
                     else
                     {
                         summary += "runtime exception";
-                    }                        
+                    }
                 }
 
                 return summary;
@@ -76,7 +76,7 @@ namespace CDS.CSharpScripting
         /// Initialise
         /// </summary>
         private EasyScript(
-            CompilationOutput compilationOutput, 
+            CompilationOutput compilationOutput,
             ReturnType scriptResults,
             Exception runtimeException)
         {
@@ -135,16 +135,45 @@ namespace CDS.CSharpScripting
             {
                 scriptResult = ScriptRunner.Run<ReturnType>(compiledScript, globals);
             }
-            catch(Exception exception)
+            catch (Exception exception)
             {
                 runtimeException = exception;
             }
 
 
             return new EasyScript<ReturnType>(
-                compiledScript.CompilationOutput, 
+                compiledScript.CompilationOutput,
                 scriptResult,
                 runtimeException);
+        }
+
+
+        /// <summary>
+        /// Compile and run the script.
+        /// </summary>
+        /// <param name="script">A C# script.</param>
+        /// <param name="globals">
+        /// An instance of some global data object. The script will be able to access public 
+        /// properties and methods in this class.
+        /// </param>
+        /// <returns>
+        /// An <see cref="EasyScript{ReturnType}"/> instance, providing details of the
+        /// compilation and [optional] script results.
+        /// </returns>
+        public static Task<EasyScript<ReturnType>> AsyncGo(string script, object globals)
+        {
+            EasyScript<ReturnType> easyScript = null;
+
+            Task<EasyScript<ReturnType>> task = Task<EasyScript<ReturnType>>.Run(() =>
+            {
+                easyScript = Go(
+                    script: script,
+                    globals: globals);
+
+                return easyScript;
+            });
+
+            return task;
         }
     }
 }

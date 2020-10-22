@@ -69,6 +69,12 @@
     <Compile Include="FormNonDefaultTypesDemo.Designer.cs">
       <DependentUpon>FormNonDefaultTypesDemo.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormAysncWithCancelScriptDemo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAysncWithCancelScriptDemo.Designer.cs">
+      <DependentUpon>FormAysncWithCancelScriptDemo.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormRunManyDemo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -103,6 +109,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FormNonDefaultTypesDemo.resx">
       <DependentUpon>FormNonDefaultTypesDemo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormAysncWithCancelScriptDemo.resx">
+      <DependentUpon>FormAysncWithCancelScriptDemo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormRunManyDemo.resx">
       <DependentUpon>FormRunManyDemo.cs</DependentUpon>

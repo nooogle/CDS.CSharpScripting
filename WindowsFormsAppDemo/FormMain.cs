@@ -61,5 +61,13 @@ namespace WindowsFormsAppDemo
                 form.ShowDialog(this);
             }
         }
+
+        private void btnCancelScriptDemo_Click(object sender, EventArgs e)
+        {
+            using (var form = new FormAysncWithCancelScriptDemo())
+            {
+                form.ShowDialog(this);
+            }
+        }
     }
 }
