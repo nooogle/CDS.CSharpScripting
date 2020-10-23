@@ -190,7 +190,7 @@ namespace CDS.CSharpScripting
 
             editor.SyntaxHighlighting = HighlightingManager.Instance.GetDefinition("C#");
             editor.FontFamily = new System.Windows.Media.FontFamily(this.Font.FontFamily.Name);
-            editor.FontSize = this.Font.Size;
+            editor.FontSize = this.Font.Size * 96 / 72;
             editor.TextChanged += Editor_TextChanged;
             wpfEditorHost.Dock = DockStyle.Fill;
             wpfEditorHost.Visible = true;

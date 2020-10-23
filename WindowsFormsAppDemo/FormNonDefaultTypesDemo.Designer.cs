@@ -55,7 +55,7 @@
             this.csharpEditor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.csharpEditor.CDSScript = resources.GetString("csharpEditor.CDSScript");
             this.csharpEditor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.csharpEditor.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.csharpEditor.Font = new System.Drawing.Font("Consolas", 9.75F);
             this.csharpEditor.Location = new System.Drawing.Point(6, 26);
             this.csharpEditor.Margin = new System.Windows.Forms.Padding(6);
             this.csharpEditor.Name = "csharpEditor";
@@ -65,6 +65,7 @@
             // compilationOutput
             // 
             this.compilationOutput.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.compilationOutput.Font = new System.Drawing.Font("Consolas", 9.75F);
             this.compilationOutput.Location = new System.Drawing.Point(6, 214);
             this.compilationOutput.Margin = new System.Windows.Forms.Padding(6);
             this.compilationOutput.Name = "compilationOutput";
@@ -99,6 +100,7 @@
             // runtimeOutput
             // 
             this.runtimeOutput.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.runtimeOutput.Font = new System.Drawing.Font("Consolas", 9.75F);
             this.runtimeOutput.Location = new System.Drawing.Point(6, 318);
             this.runtimeOutput.Margin = new System.Windows.Forms.Padding(6);
             this.runtimeOutput.Name = "runtimeOutput";

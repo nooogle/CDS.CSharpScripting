@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Windows.Media;
 
 [assembly: AssemblyTitle("CDS.CSharpScripting")]
 [assembly: AssemblyDescription("")]

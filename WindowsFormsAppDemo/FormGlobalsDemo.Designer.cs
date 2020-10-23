@@ -56,9 +56,9 @@
     "y available in this script\r\nConsole.WriteLine(Animal);\r\nAnimal = \"Shark\";\r\nConso" +
     "le.WriteLine(Animal);";
             this.csharpEditor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.csharpEditor.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.csharpEditor.Font = new System.Drawing.Font("Consolas", 9.75F);
             this.csharpEditor.Location = new System.Drawing.Point(6, 26);
-            this.csharpEditor.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.csharpEditor.Margin = new System.Windows.Forms.Padding(6);
             this.csharpEditor.Name = "csharpEditor";
             this.csharpEditor.Size = new System.Drawing.Size(764, 156);
             this.csharpEditor.TabIndex = 3;
@@ -66,8 +66,9 @@
             // compilationOutput
             // 
             this.compilationOutput.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.compilationOutput.Font = new System.Drawing.Font("Consolas", 9.75F);
             this.compilationOutput.Location = new System.Drawing.Point(6, 214);
-            this.compilationOutput.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.compilationOutput.Margin = new System.Windows.Forms.Padding(6);
             this.compilationOutput.Name = "compilationOutput";
             this.compilationOutput.Size = new System.Drawing.Size(764, 72);
             this.compilationOutput.TabIndex = 4;
@@ -100,8 +101,9 @@
             // runtimeOutput
             // 
             this.runtimeOutput.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.runtimeOutput.Font = new System.Drawing.Font("Consolas", 9.75F);
             this.runtimeOutput.Location = new System.Drawing.Point(6, 318);
-            this.runtimeOutput.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.runtimeOutput.Margin = new System.Windows.Forms.Padding(6);
             this.runtimeOutput.Name = "runtimeOutput";
             this.runtimeOutput.Size = new System.Drawing.Size(764, 73);
             this.runtimeOutput.TabIndex = 6;

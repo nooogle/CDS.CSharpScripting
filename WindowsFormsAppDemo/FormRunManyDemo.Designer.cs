@@ -54,9 +54,9 @@
             this.csharpEditor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.csharpEditor.CDSScript = resources.GetString("csharpEditor.CDSScript");
             this.csharpEditor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.csharpEditor.Font = new System.Drawing.Font("Consolas", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.csharpEditor.Font = new System.Drawing.Font("Consolas", 9.75F);
             this.csharpEditor.Location = new System.Drawing.Point(6, 26);
-            this.csharpEditor.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.csharpEditor.Margin = new System.Windows.Forms.Padding(6);
             this.csharpEditor.Name = "csharpEditor";
             this.csharpEditor.Size = new System.Drawing.Size(764, 226);
             this.csharpEditor.TabIndex = 3;
@@ -65,8 +65,9 @@
             // output
             // 
             this.output.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.output.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.output.Location = new System.Drawing.Point(6, 284);
-            this.output.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.output.Margin = new System.Windows.Forms.Padding(6);
             this.output.Name = "output";
             this.output.Size = new System.Drawing.Size(764, 107);
             this.output.TabIndex = 4;

@@ -1,5 +1,8 @@
 ﻿using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Windows.Media;
+
+[assembly: DisableDpiAwareness]
 
 [assembly: AssemblyTitle("WindowsFormsAppDemo")]
 [assembly: AssemblyDescription("")]

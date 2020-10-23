@@ -18,7 +18,7 @@ namespace ConsoleAppDemo
 
 
 
-        public static async void Run()
+        public static void Run()
         {
             Globals globals = new Globals();
 

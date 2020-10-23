@@ -55,7 +55,7 @@
             this.csharpEditor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.csharpEditor.CDSScript = resources.GetString("csharpEditor.CDSScript");
             this.csharpEditor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.csharpEditor.Font = new System.Drawing.Font("Consolas", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.csharpEditor.Font = new System.Drawing.Font("Consolas", 9.75F);
             this.csharpEditor.Location = new System.Drawing.Point(6, 26);
             this.csharpEditor.Margin = new System.Windows.Forms.Padding(6);
             this.csharpEditor.Name = "csharpEditor";
@@ -66,6 +66,7 @@
             // output
             // 
             this.output.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.output.Font = new System.Drawing.Font("Consolas", 9.75F);
             this.output.Location = new System.Drawing.Point(6, 284);
             this.output.Margin = new System.Windows.Forms.Padding(6);
             this.output.Name = "output";
@@ -131,7 +132,7 @@
             this.btnStopScript.UseVisualStyleBackColor = true;
             this.btnStopScript.Click += new System.EventHandler(this.btnStopScript_Click);
             // 
-            // FormCancelScriptDemo
+            // FormAysncWithCancelScriptDemo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;

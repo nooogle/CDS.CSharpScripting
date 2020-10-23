@@ -4,4 +4,4 @@
 [assembly: AssemblyCopyright("Copyright © Carpe Diem Systems Ltd. 2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
-[assembly: AssemblyFileVersion("1.0.10")]
+[assembly: AssemblyFileVersion("1.0.11")]
