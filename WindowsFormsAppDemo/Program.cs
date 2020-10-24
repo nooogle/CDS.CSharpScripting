@@ -12,9 +12,9 @@ namespace WindowsFormsAppDemo
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-            static void Main()
-            {
-                HookThreadExceptions();
+        static void Main()
+        {
+            HookThreadExceptions();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new FormMain());

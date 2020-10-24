@@ -1,4 +1,7 @@
 # CDS.CSharpScripting
+
+Super-simple .Net Framework tools for C# scripting, including:
+
 1. C# code editor
 2. Script compilation and execution
 
@@ -19,17 +22,58 @@ to add a hook to your app to catch these.
 * Interact with scripts by sharing data (as global variables) and returning data back to the host
 
 
-<img src="./Wiki/Wiki_diagrams.jpg">
 
+## Walkthoughs
 
+### EasyScript
 
-## Demo
+This requires the least infrastructure. Just call the Go method, pass in a script, and capture returned data.
 
-Code:
-`EasyScript<object>.Go("Console.WriteLine(\"This is a one line script demo!\");");`
+Example 1:
+
+`EasyScript<object>.Go("Console.WriteLine(\"Hello world, from the script!\");");`
 
 Output:
-`This is a one line script demo!`
+
+`Hello world, from the script!`
+
+
+Example 2: 
+
+```
+var easyScript = EasyScript<string>.Go("return \"I am a message from the script!\";");
+Console.WriteLine(easyScript.ScriptResults);
+```
+
+Output:
+
+`I am a message from the script!`
+
+
+Example 3:
+
+```
+var easyScript = EasyScript<object>.Go("var x = y");
+Console.WriteLine(easyScript.Summary);
+foreach(var message in easyScript.CompilationOutput.Messages)
+{
+    Console.WriteLine($"Message: {message}");
+}
+```
+
+
+Output:
+
+```
+Detected 0 warning(s), 2 error(s), runtime exception
+Message: (1,10): error CS1002: ; expected
+Message: (1,9): error CS0103: The name 'y' does not exist in the current context
+```
+
+Example 4:
+
+
+
 
 
 ## Catching ThreadExceptions

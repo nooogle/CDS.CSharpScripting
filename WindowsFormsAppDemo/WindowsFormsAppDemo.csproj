@@ -158,6 +158,5 @@
       <Name>CDS.CSharpScripting</Name>
     </ProjectReference>
   </ItemGroup>
-  <Import Project="..\SharedAssemblyInfo\SharedAssemblyInfo.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

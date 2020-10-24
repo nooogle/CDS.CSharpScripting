@@ -59,8 +59,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EasyScriptAsync.cs" />
-    <Compile Include="EasyScriptDemos.cs" />
+    <Compile Include="EasyScriptsDemos\Async.cs" />
+    <Compile Include="EasyScriptsDemos\CompileError.cs" />
+    <Compile Include="EasyScriptsDemos\EnterYourOwn.cs" />
+    <Compile Include="EasyScriptsDemos\ReturnData.cs" />
+    <Compile Include="EasyScriptsDemos\HelloWorld.cs" />
+    <Compile Include="EasyScriptsDemos\HostData.cs" />
+    <Compile Include="EasyScriptsDemos\Menu.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TextMenu.cs" />
@@ -75,6 +80,5 @@
       <Name>CDS.CSharpScripting</Name>
     </ProjectReference>
   </ItemGroup>
-  <Import Project="..\SharedAssemblyInfo\SharedAssemblyInfo.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
