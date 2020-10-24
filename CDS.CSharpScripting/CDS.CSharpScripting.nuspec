@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package >
-  <metadata>
-    <id>$id$</id>
-    <version>$version$</version>
-    <title>$title$</title>
-    <authors>$author$</authors>
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <license type="expression">MIT</license>
-    <projectUrl>http://project_url_here_or_delete_this_line/</projectUrl>
-    <iconUrl>http://icon_url_here_or_delete_this_line/</iconUrl>
-    <description>$description$</description>
-    <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
-    <copyright>$copyright$</copyright>
-    <tags>Tag1 Tag2</tags>
-  </metadata>
+	<metadata>
+		<id>CDS.CSharpScripting</id>
+		<version>1.0.13</version>
+		<title>CDS.CSharpScripting</title>
+		<authors>Jon Shadforth</authors>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<license type="expression">MIT</license>
+		<projectUrl>https://github.com/nooogle/CDS.CSharpScripting</projectUrl>
+		<description>C# code editor (using RoslynPad) and simplified C# compilation and execution</description>
+		<releaseNotes>First release</releaseNotes>
+		<copyright>Copyright (c) 2020 Carpe Diem Systems Ltd.</copyright>
+		<tags>C# Scripting RoslynPad</tags>
+		<dependencies>
+			<group targetFramework=".NETFramework4.8" />
+		</dependencies>
+	</metadata>
 </package>

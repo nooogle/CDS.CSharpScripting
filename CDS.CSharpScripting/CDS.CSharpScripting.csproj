@@ -194,6 +194,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="CDS.CSharpScripting.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

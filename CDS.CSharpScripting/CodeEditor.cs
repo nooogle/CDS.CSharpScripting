@@ -178,15 +178,15 @@ namespace CDS.CSharpScripting
             // This causes the light bulb to appear but the context menu doesn't
             // seem to work properly...
 
-            var handle = Properties.Resource.IntellisenseLightBulb_16x.GetHbitmap();
+            //var handle = Properties.Resource.IntellisenseLightBulb_16x.GetHbitmap();
 
-            editor.ContextActionsIcon = Imaging.CreateBitmapSourceFromHBitmap(
-                handle,
-                IntPtr.Zero,
-                Int32Rect.Empty,
-                BitmapSizeOptions.FromEmptyOptions());
+            //editor.ContextActionsIcon = Imaging.CreateBitmapSourceFromHBitmap(
+            //    handle,
+            //    IntPtr.Zero,
+            //    Int32Rect.Empty,
+            //    BitmapSizeOptions.FromEmptyOptions());
 
-            DeleteObject(handle);
+            //DeleteObject(handle);
 
             editor.SyntaxHighlighting = HighlightingManager.Instance.GetDefinition("C#");
             editor.FontFamily = new System.Windows.Media.FontFamily(this.Font.FontFamily.Name);

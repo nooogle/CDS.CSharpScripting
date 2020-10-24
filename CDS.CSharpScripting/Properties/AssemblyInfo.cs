@@ -11,4 +11,4 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCopyright("Copyright © Carpe Diem Systems Ltd. 2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
-[assembly: AssemblyFileVersion("1.0.12")]
+[assembly: AssemblyFileVersion("1.0.13")]
