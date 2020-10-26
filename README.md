@@ -5,6 +5,8 @@ Super-simple .Net Framework tools for C# scripting, including:
 1. C# code editor
 2. Script compilation and execution
 
+YouTube demo: https://youtu.be/YQy_tLJY_Mw
+
 The code editor is a simplified wrapper around the amazing [RoslynPad C# WPF](https://github.com/aelij/RoslynPad) code editor, via the RoslynPad.Roslyn.Windows NuGet pacakge.
 
 Compilation and execution is built around Microsoft's open-source .Net compiler platform
@@ -12,22 +14,59 @@ known as [Roslyn](https://en.wikipedia.org/wiki/Roslyn_(compiler)), available fr
 the Microsoft.CSharp package on NuGet.
 
 **Note** there seem to be some bugs in Roslypad and/or AvalonEdit (the underlying text 
-editor) that cause result in thread exceptions being thrown. See the notes below on how
-to add a hook to your app to catch these. 
-
-## Overview
-
-* Create a .Net application with an embedded C# code editor providing live intellisense
-* Compile and execute scripts
-* Interact with scripts by sharing data (as global variables) and returning data back to the host
+editor) that cause result in thread exceptions being thrown. See the notes below,
+[ThreadException](#ThreadException), on how to add a hook in your app to catch these. 
 
 
+## Getting started
 
+Use NuGet to bring in CDS.CSharpScripting to your project. This project is 
+(currently) only written and tested around .Net Framework V4.8 WinForms 
+development.
+
+
+## WinForms code editor
+
+For the code editor, using a collection of commonly used namespaces:
+
+1. Use the ToolBar to find the CodeEditor control and drag it onto your form.
+2. In the Form's Load event handler initialise the editor by calling CDSInitialise.
+3. That's it!
+
+CDSInitialise has overloads that allow different namespaces and assembly references
+to be specified. See the demos for more information. It also allows the type of 
+a global variables class to be specified - this allows for data sharing between
+the script and the host.
+
+At any point the script can be read/written via the CDSScript property on the 
+code editor.
+
+To run the script:
+1. Use EasyScript for simple compilation and execution.
+2. Use the ScriptCompiler and ScriptRunning classes. These allow a compiled script to be run many times without needing to recompile. It also allows static data in the script to be retained between executions.
+
+
+## Capturing console output
+
+A utility class, ConsoleOutputHook, allows any scripted Console.Write or 
+Console.WriteLine output to be redirected programmatically. In the WinForms demo
+project we send this output to an OutputPanel.
+
+```
+using (var consoleHook = new ConsoleOutputHook(msg => outputPanel.CDSWrite(msg)))
+{
+    <snip/>
+}
+```
+
+
+ 
 ## Walkthoughs
 
 ### EasyScript
 
-This requires the least infrastructure. Just call the Go method, pass in a script, and capture returned data.
+This requires the least infrastructure. Just call the Go method, pass in a script,
+and capture any returned data.
 
 Example 1:
 
@@ -39,18 +78,6 @@ Output:
 
 
 Example 2: 
-
-```
-var easyScript = EasyScript<string>.Go("return \"I am a message from the script!\";");
-Console.WriteLine(easyScript.ScriptResults);
-```
-
-Output:
-
-`I am a message from the script!`
-
-
-Example 3:
 
 ```
 var easyScript = EasyScript<object>.Go("var x = y");
@@ -70,13 +97,22 @@ Message: (1,10): error CS1002: ; expected
 Message: (1,9): error CS0103: The name 'y' does not exist in the current context
 ```
 
-Example 4:
+
+Example 3:
+
+```
+var easyScript = EasyScript<string>.Go("return \"I am a message from the script!\";");
+Console.WriteLine(easyScript.ScriptResults);
+```
+
+Output:
+
+`I am a message from the script!`
 
 
 
 
-
-## Catching ThreadExceptions
+## ThreadException
 
 At the time of writing, using RoslynPad 3.6.0, there are occasional WinForms 
 thread exceptions - these are (probably) thrown when some activity is attempted

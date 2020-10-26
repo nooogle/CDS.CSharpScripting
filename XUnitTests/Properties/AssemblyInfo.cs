@@ -1,9 +1,9 @@
 ﻿using System.Reflection;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("ConsoleAppDemo")]
+[assembly: AssemblyTitle("XUnitTests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyProduct("ConsoleAppDemo")]
+[assembly: AssemblyProduct("XUnitTests")]
 [assembly: ComVisible(false)]
-[assembly: Guid("46ec648f-b372-45ee-a0f0-a2d37d71cf4b")]
+[assembly: Guid("e4274bb3-6ecb-4639-a029-17ce7619eb9a")]
