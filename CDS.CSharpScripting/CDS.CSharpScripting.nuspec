@@ -2,7 +2,7 @@
 <package >
 	<metadata>
 		<id>CDS.CSharpScripting</id>
-		<version>1.0.13</version>
+		<version>1.0.14</version>
 		<title>CDS.CSharpScripting</title>
 		<authors>Jon Shadforth</authors>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
