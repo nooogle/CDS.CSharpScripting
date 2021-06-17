@@ -1,4 +1,4 @@
-﻿namespace CDS.CSharpScripting
+﻿namespace CDS.CSharpScripting.ScintillaNETEditor
 {
     partial class OutputPanel
     {

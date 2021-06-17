@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.btnRun = new System.Windows.Forms.Button();
-            this.csharpEditor = new CDS.CSharpScripting.CodeEditor();
-            this.compilationOutput = new CDS.CSharpScripting.OutputPanel();
+            this.csharpEditor = new CDS.CSharpScripting.ScintillaNETEditor.CodeEditor();
+            this.compilationOutput = new CDS.CSharpScripting.ScintillaNETEditor.OutputPanel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.runtimeOutput = new CDS.CSharpScripting.OutputPanel();
+            this.runtimeOutput = new CDS.CSharpScripting.ScintillaNETEditor.OutputPanel();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -154,11 +154,11 @@
         #endregion
 
         private System.Windows.Forms.Button btnRun;
-        private CDS.CSharpScripting.CodeEditor csharpEditor;
-        private CDS.CSharpScripting.OutputPanel compilationOutput;
+        private CDS.CSharpScripting.ScintillaNETEditor.CodeEditor csharpEditor;
+        private CDS.CSharpScripting.ScintillaNETEditor.OutputPanel compilationOutput;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label label1;
-        private CDS.CSharpScripting.OutputPanel runtimeOutput;
+        private CDS.CSharpScripting.ScintillaNETEditor.OutputPanel runtimeOutput;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
     }

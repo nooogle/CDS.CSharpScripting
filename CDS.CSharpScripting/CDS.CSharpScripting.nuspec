@@ -8,10 +8,10 @@
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<license type="expression">MIT</license>
 		<projectUrl>https://github.com/nooogle/CDS.CSharpScripting</projectUrl>
-		<description>C# code editor (using RoslynPad) and simplified C# compilation and execution</description>
+		<description>C# code editor (using ScintillaNET) and simplified C# compilation and execution</description>
 		<releaseNotes>First release</releaseNotes>
 		<copyright>Copyright (c) 2020 Carpe Diem Systems Ltd.</copyright>
-		<tags>C# Scripting RoslynPad</tags>
+		<tags>C# Scripting ScintillaNET</tags>
 		<dependencies>
 			<group targetFramework=".NETFramework4.8" />
 		</dependencies>

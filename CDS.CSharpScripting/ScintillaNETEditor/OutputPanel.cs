@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace CDS.CSharpScripting
+namespace CDS.CSharpScripting.ScintillaNETEditor
 {
     /// <summary>
     /// Simple Scintilla-based window for displayed read-only output text.

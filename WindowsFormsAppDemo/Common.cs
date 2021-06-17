@@ -10,7 +10,7 @@ namespace WindowsFormsAppDemo
 {
     static class Common
     {
-        public static void SendExceptionToOutput(OutputPanel output, string msg, Exception exception)
+        public static void SendExceptionToOutput(CDS.CSharpScripting.ScintillaNETEditor.OutputPanel output, string msg, Exception exception)
         {
             output.CDSWriteLine(msg);
             RecursiveSendExceptionMessageToOutput(output: output, level: 1, exception: exception);
@@ -18,7 +18,7 @@ namespace WindowsFormsAppDemo
 
 
 
-        private static void RecursiveSendExceptionMessageToOutput(OutputPanel output, int level, Exception exception)
+        private static void RecursiveSendExceptionMessageToOutput(CDS.CSharpScripting.ScintillaNETEditor.OutputPanel output, int level, Exception exception)
         {
             output.CDSWriteLine($"{level} msg: {exception.Message}");
 
@@ -29,7 +29,7 @@ namespace WindowsFormsAppDemo
         }
 
 
-        public static void DisplayCompilationOutput(OutputPanel output, CompiledScript compiledScript)
+        public static void DisplayCompilationOutput(CDS.CSharpScripting.ScintillaNETEditor.OutputPanel output, CompiledScript compiledScript)
         {
             output.CDSWriteLine(
                 $"{compiledScript.CompilationOutput.ErrorCount} error(s), " +

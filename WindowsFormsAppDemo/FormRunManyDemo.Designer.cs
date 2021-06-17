@@ -30,8 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormRunManyDemo));
             this.btnRun = new System.Windows.Forms.Button();
-            this.csharpEditor = new CDS.CSharpScripting.CodeEditor();
-            this.output = new CDS.CSharpScripting.OutputPanel();
+            this.csharpEditor = new CDS.CSharpScripting.ScintillaNETEditor.CodeEditor();
+            this.output = new CDS.CSharpScripting.ScintillaNETEditor.OutputPanel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -141,8 +141,8 @@
         #endregion
 
         private System.Windows.Forms.Button btnRun;
-        private CDS.CSharpScripting.CodeEditor csharpEditor;
-        private CDS.CSharpScripting.OutputPanel output;
+        private CDS.CSharpScripting.ScintillaNETEditor.CodeEditor csharpEditor;
+        private CDS.CSharpScripting.ScintillaNETEditor.OutputPanel output;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
