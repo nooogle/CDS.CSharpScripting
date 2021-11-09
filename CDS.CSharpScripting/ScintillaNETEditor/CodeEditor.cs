@@ -43,6 +43,21 @@ namespace CDS.CSharpScripting.ScintillaNETEditor
 
 
         /// <summary>
+        /// Current cursor position
+        /// </summary>
+        public int CDSSelectionStart
+        {
+            get => editor.SelectionStart;
+            set => editor.SelectionStart = value;
+        }
+
+
+        public void X()
+        {
+            
+        }
+
+        /// <summary>
         /// Basic initialisation
         /// </summary>
         public CodeEditor()
@@ -161,7 +176,7 @@ namespace CDS.CSharpScripting.ScintillaNETEditor
         /// </summary>
         private void Editor_TextChanged(object sender, EventArgs e)
         {
-            CDSScriptChanged?.Invoke(sender, e);
+            //CDSScriptChanged?.Invoke(sender, e);
         }
 
         private void CodeEditor_Load(object sender, EventArgs e)
@@ -501,5 +516,10 @@ namespace CDS.CSharpScripting.ScintillaNETEditor
 
         #endregion
 
+        private void editor_UpdateUI(object sender, UpdateUIEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine($"Cur {editor.CurrentPosition}, anch {editor.AnchorPosition}, sel {editor.SelectionStart}");
+            CDSScriptChanged?.Invoke(sender, e);
+        }
     }
 }

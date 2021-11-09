@@ -38,7 +38,8 @@
             this.editor.Name = "editor";
             this.editor.Size = new System.Drawing.Size(647, 390);
             this.editor.TabIndex = 0;
-            this.editor.Text = "scintilla1";
+            this.editor.Text = "";
+            this.editor.UpdateUI += new System.EventHandler<ScintillaNET.UpdateUIEventArgs>(this.editor_UpdateUI);
             this.editor.TextChanged += new System.EventHandler(this.Editor_TextChanged);
             // 
             // CodeEditor

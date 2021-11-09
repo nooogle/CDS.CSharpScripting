@@ -20,6 +20,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XUnitTests", "XUnitTests\XU
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SharedAssemblyInfo", "SharedAssemblyInfo\SharedAssemblyInfo.shproj", "{21E572C8-C82E-4115-BDBD-ACDB0D7EF6E8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScratchPad", "ScratchPad\ScratchPad.csproj", "{B70CB59D-6EB1-4879-9C1B-CF36F433C2D7}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		SharedAssemblyInfo\SharedAssemblyInfo.projitems*{21e572c8-c82e-4115-bdbd-acdb0d7ef6e8}*SharedItemsImports = 13
@@ -48,6 +50,10 @@ Global
 		{E4274BB3-6ECB-4639-A029-17CE7619EB9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E4274BB3-6ECB-4639-A029-17CE7619EB9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E4274BB3-6ECB-4639-A029-17CE7619EB9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B70CB59D-6EB1-4879-9C1B-CF36F433C2D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B70CB59D-6EB1-4879-9C1B-CF36F433C2D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B70CB59D-6EB1-4879-9C1B-CF36F433C2D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B70CB59D-6EB1-4879-9C1B-CF36F433C2D7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

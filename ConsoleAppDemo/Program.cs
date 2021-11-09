@@ -8,6 +8,9 @@ namespace ConsoleAppDemo
     {
         static void Main()
         {
+            new Prototyping.CodeCompletion().Run();
+            return;
+
             var menu = new (string text, Action action)[]
                 {
                     ("EasyScript", EasyScriptDemos.Menu.Run),
