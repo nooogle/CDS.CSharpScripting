@@ -166,6 +166,7 @@
     </Compile>
     <Compile Include="Defaults.cs" />
     <Compile Include="EasyScript.cs" />
+    <Compile Include="ScintillaNETEditor\Delegates.cs" />
     <Compile Include="ScintillaNETEditor\HotKeyManager.cs" />
     <Compile Include="ScintillaNETEditor\OutputPanel.cs">
       <SubType>UserControl</SubType>
@@ -184,6 +185,7 @@
     <Compile Include="ScriptRunner.cs" />
     <Compile Include="Server\CodeCompletion.cs" />
     <Compile Include="Server\CompletionEntry.cs" />
+    <Compile Include="Server\Delegates.cs" />
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <ItemGroup>

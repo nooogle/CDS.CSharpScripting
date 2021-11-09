@@ -35,7 +35,11 @@ namespace WindowsFormsAppDemo.Prototyping
             // 
             // editor
             // 
+            this.editor.CDSScript = "";
+            this.editor.CDSSelectionStart = 0;
             this.editor.Dock = System.Windows.Forms.DockStyle.Left;
+            this.editor.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.editor.GetAutoCompleteList = null;
             this.editor.Location = new System.Drawing.Point(0, 0);
             this.editor.Name = "editor";
             this.editor.Size = new System.Drawing.Size(453, 478);

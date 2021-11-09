@@ -28,7 +28,7 @@ namespace WindowsFormsAppDemo.Prototyping
             textInfo.Text = "Thinking...";
 
             var bad_bad_bad = new CancellationTokenSource();
-            var completions = await codeCompletion.Test(text, caretPosition, bad_bad_bad.Token);
+            var completions = await codeCompletion.GetCompletions(text, caretPosition, bad_bad_bad.Token);
 
             textInfo.Text =
                 DateTime.Now.ToLongTimeString() +

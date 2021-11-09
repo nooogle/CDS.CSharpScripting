@@ -38,9 +38,10 @@
             this.editor.Name = "editor";
             this.editor.Size = new System.Drawing.Size(647, 390);
             this.editor.TabIndex = 0;
-            this.editor.Text = "";
+            this.editor.CharAdded += new System.EventHandler<ScintillaNET.CharAddedEventArgs>(this.editor_CharAdded);
             this.editor.UpdateUI += new System.EventHandler<ScintillaNET.UpdateUIEventArgs>(this.editor_UpdateUI);
             this.editor.TextChanged += new System.EventHandler(this.Editor_TextChanged);
+            this.editor.KeyDown += new System.Windows.Forms.KeyEventHandler(this.editor_KeyDown);
             // 
             // CodeEditor
             // 

@@ -15,6 +15,17 @@ namespace WindowsFormsAppDemo.Prototyping
     {
         CDS.CSharpScripting.Server.CodeCompletion codeCompletion;
 
+
+        async Task<IEnumerable<string>> TestGetAutoCompleteWords(CancellationToken cancellationToken)
+        {
+            return await Task<IEnumerable<string>>.Run(() =>
+            {
+                var items = new[] { "fish", "chips" };
+                return items;
+            });
+        }
+
+
         public FormScin2()
         {
             InitializeComponent();
@@ -22,6 +33,7 @@ namespace WindowsFormsAppDemo.Prototyping
 
         private async void editor_TextChanged(object sender, EventArgs e)
         {
+            return;
             var text = editor.CDSScript;
             var caretPosition = editor.CDSSelectionStart;
             editor.X();
@@ -31,7 +43,7 @@ namespace WindowsFormsAppDemo.Prototyping
             try
             {
                 var bad_bad_bad = new CancellationTokenSource();
-                var completions = await codeCompletion.Test(text, caretPosition, bad_bad_bad.Token);
+                var completions = await codeCompletion.GetCompletions(text, caretPosition, bad_bad_bad.Token);
 
                 textInfo.Text =
                     DateTime.Now.ToLongTimeString() +
@@ -47,10 +59,22 @@ namespace WindowsFormsAppDemo.Prototyping
             editor.X();
         }
 
+        async Task<IEnumerable<string>> GetAutoCompletions(CancellationToken cancellationToken)
+        {
+            var completions = await codeCompletion.GetCompletions(
+                    script: editor.CDSScript,
+                    caretPosition: editor.CDSSelectionStart,
+                    cancellationToken: cancellationToken);
+
+            return completions.Select(c => c.Item);
+        }
+
 
         private void FormScin2_Load(object sender, EventArgs e)
         {
             codeCompletion = new CDS.CSharpScripting.Server.CodeCompletion();
+
+            editor.GetAutoCompleteList = GetAutoCompletions;
         }
     }
 }

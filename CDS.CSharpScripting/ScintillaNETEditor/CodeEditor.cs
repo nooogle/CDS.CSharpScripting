@@ -6,6 +6,8 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 
@@ -219,6 +221,50 @@ namespace CDS.CSharpScripting.ScintillaNETEditor
             //TextArea.ClearCmdKey(Keys.Control | Keys.L);
             //TextArea.ClearCmdKey(Keys.Control | Keys.U);
 
+        }
+
+
+        private async void RunAutoComplete()
+        {
+            if (GetAutoCompleteList == null) { return; }
+
+            // Find the word start
+            var currentPos = editor.CurrentPosition;
+            var wordStartPos = editor.WordStartPosition(currentPos, true);
+            var lenEntered = currentPos - wordStartPos;
+
+            // Display the autocompletion list
+
+            if (cancellationTokenSource != null)
+            {
+                cancellationTokenSource.Cancel();
+            }
+
+            cancellationTokenSource = new CancellationTokenSource();
+
+            try
+            {
+                var autoShowList = await GetAutoCompleteList(cancellationTokenSource.Token);
+
+                //if (lenEntered > 2)
+                {
+                    editor.AutoCShow(lenEntered, string.Join(" ", autoShowList.ToArray()));
+                }
+            }
+            catch (OperationCanceledException)
+            {
+                //System.Diagnostics.Debug.WriteLine("Cancelled!");
+            }
+
+            //// Capitalize known keywords automatically
+            //editor.TargetStart = wordStartPos;
+            //editor.TargetEnd = currentPos;
+            //if (autoShowList.Contains(editor.TargetText))
+            //{
+            //    editor.ReplaceTarget(editor.TargetText.ToUpper());
+            //    editor.AnchorPosition = editor.WordEndPosition(currentPos, true);
+            //    editor.CurrentPosition = editor.WordEndPosition(currentPos, true);
+            //}        }
         }
 
         private void InitSyntaxColoring()
@@ -520,6 +566,62 @@ namespace CDS.CSharpScripting.ScintillaNETEditor
         {
             System.Diagnostics.Debug.WriteLine($"Cur {editor.CurrentPosition}, anch {editor.AnchorPosition}, sel {editor.SelectionStart}");
             CDSScriptChanged?.Invoke(sender, e);
+        }
+
+        public GetAutoCompleteListDelegate GetAutoCompleteList { get; set; } 
+        CancellationTokenSource cancellationTokenSource;
+
+        private void editor_CharAdded(object sender, CharAddedEventArgs e)
+        {
+            //if(GetAutoCompleteList == null) { return; }
+
+            //// Find the word start
+            //var currentPos = editor.CurrentPosition;
+            //var wordStartPos = editor.WordStartPosition(currentPos, true);
+            //var lenEntered = currentPos - wordStartPos;
+
+            //// Display the autocompletion list
+
+            //if(cancellationTokenSource != null)
+            //{
+            //    cancellationTokenSource.Cancel();
+            //}
+
+            //cancellationTokenSource = new CancellationTokenSource();
+
+            //try
+            //{
+            //    var autoShowList = await GetAutoCompleteList(cancellationTokenSource.Token);
+
+            //    if (lenEntered > 2)
+            //    {
+            //        editor.AutoCShow(lenEntered, string.Join(" ", autoShowList.ToArray()));
+            //    }
+            //}
+            //catch (OperationCanceledException)
+            //{
+            //    //System.Diagnostics.Debug.WriteLine("Cancelled!");
+            //}
+
+            ////// Capitalize known keywords automatically
+            ////editor.TargetStart = wordStartPos;
+            ////editor.TargetEnd = currentPos;
+            ////if (autoShowList.Contains(editor.TargetText))
+            ////{
+            ////    editor.ReplaceTarget(editor.TargetText.ToUpper());
+            ////    editor.AnchorPosition = editor.WordEndPosition(currentPos, true);
+            ////    editor.CurrentPosition = editor.WordEndPosition(currentPos, true);
+            ////}
+        }
+
+
+        private void editor_KeyDown(object sender, KeyEventArgs e)
+        {
+            if ((e.KeyCode == Keys.Space) && e.Control)
+            {
+                e.Handled = true;
+                RunAutoComplete();
+            }
         }
     }
 }

@@ -126,47 +126,47 @@ namespace CDS.CSharpScripting.Server
         }
 
 
-        public async Task<CompletionEntry[]> Test(string script, int caretPosition, CancellationToken cancellationToken)
-        {
-            string currentWord = GetCurrentEditingWord(script);
-            bool isOneCharAppendedToPreviousScript = IsOneCharAppendedToPreviousScript(script);
+        //public async Task<CompletionEntry[]> Test(string script, int caretPosition, CancellationToken cancellationToken)
+        //{
+        //    string currentWord = GetCurrentEditingWord(script);
+        //    bool isOneCharAppendedToPreviousScript = IsOneCharAppendedToPreviousScript(script);
 
-            System.Diagnostics.Debug.WriteLine(
-                $"\nTest: pos [{caretPosition}], CW [{currentWord}], APP [{isOneCharAppendedToPreviousScript}], script [{script}]");
+        //    System.Diagnostics.Debug.WriteLine(
+        //        $"\nTest: pos [{caretPosition}], CW [{currentWord}], APP [{isOneCharAppendedToPreviousScript}], script [{script}]");
 
 
-            lastScript = script;
-            //var completionList = lastCompletionList;
-            string[] completionList = new string[0];
+        //    lastScript = script;
+        //    //var completionList = lastCompletionList;
+        //    string[] completionList = new string[0];
 
-            bool alwaysRefreshBecuaseReuseDoesntWork = true;
+        //    bool alwaysRefreshBecuaseReuseDoesntWork = true;
 
-            if (alwaysRefreshBecuaseReuseDoesntWork ||
-                !isOneCharAppendedToPreviousScript || 
-                (completionList == null) ||
-                string.IsNullOrEmpty(currentWord))
-            {
-                System.Diagnostics.Debug.WriteLine($"Refreshing completion list");
+        //    if (alwaysRefreshBecuaseReuseDoesntWork ||
+        //        !isOneCharAppendedToPreviousScript || 
+        //        (completionList == null) ||
+        //        string.IsNullOrEmpty(currentWord))
+        //    {
+        //        System.Diagnostics.Debug.WriteLine($"Refreshing completion list");
 
-                completionList = await RefreshCompletions(
-                    script, 
-                    caretPosition,
-                    cancellationToken).ConfigureAwait(false);
+        //        completionList = await RefreshCompletions(
+        //            script, 
+        //            caretPosition,
+        //            cancellationToken).ConfigureAwait(false);
 
-                //lastCompletionList = completionList;
-            }
-            else
-            {
-                System.Diagnostics.Debug.WriteLine($"Reusing completion list");
-            }
+        //        //lastCompletionList = completionList;
+        //    }
+        //    else
+        //    {
+        //        System.Diagnostics.Debug.WriteLine($"Reusing completion list");
+        //    }
 
-            CompletionEntry[] completionInfo = 
-                ExtractCompletionInfo(
-                    currentWord, 
-                    completionList);
+        //    CompletionEntry[] completionInfo = 
+        //        ExtractCompletionInfo(
+        //            currentWord, 
+        //            completionList);
 
-            return completionInfo;
-        }
+        //    return completionInfo;
+        //}
 
 
 
@@ -203,7 +203,7 @@ namespace CDS.CSharpScripting.Server
             return "?";
         }
 
-        private async Task<string[]> RefreshCompletions(
+        public async Task<IEnumerable<CompletionEntry>> GetCompletions(
             string script, 
             int caretPosition,
             CancellationToken cancellationToken)
@@ -234,7 +234,7 @@ namespace CDS.CSharpScripting.Server
                     cancellationToken: cancellationToken)
                 .ConfigureAwait(false);
 
-            string[] completionInfo = new string[0];
+            IEnumerable<CompletionEntry> completionInfo = new CompletionEntry[0];
 
             if (completionList != null)
             {
@@ -268,11 +268,11 @@ namespace CDS.CSharpScripting.Server
             return completionInfo;
         }
 
-        private static async Task<string[]> GetCompletionList(
+        private static async Task<IEnumerable<CompletionEntry>> GetCompletionList(
             Microsoft.CodeAnalysis.Document currentDocument,
             IEnumerable<Microsoft.CodeAnalysis.Completion.CompletionItem> completionItems)
         {
-            List<string> completionList = new List<string>();
+            var completionList = new List<CompletionEntry>();
 
             foreach (var item in completionItems)
             {
@@ -299,7 +299,12 @@ namespace CDS.CSharpScripting.Server
                 string info = "";
                 foreach (var tag in item.Tags) { info += $"[{tag}], "; }
                 info += $"[{ item.DisplayText}], span [{item.Span}] QI [{quickInfoText}]";
-                completionList.Add(info);
+
+                var completionEntry = new CompletionEntry(
+                    item: item.DisplayText,
+                    description: info);
+
+                completionList.Add(completionEntry);
 
                 if (completionList.Count == 10)
                 {
