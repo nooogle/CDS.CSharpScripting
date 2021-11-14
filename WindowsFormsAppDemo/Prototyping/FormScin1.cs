@@ -13,7 +13,7 @@ namespace WindowsFormsAppDemo.Prototyping
 {
     public partial class FormScin1 : Form
     {
-        CDS.CSharpScripting.Server.CodeCompletion codeCompletion;
+        CDS.CSharpScripting.EditorServices.CodeCompletion codeCompletion;
 
         public FormScin1()
         {
@@ -39,7 +39,7 @@ namespace WindowsFormsAppDemo.Prototyping
 
         private void FormScin1_Load(object sender, EventArgs e)
         {
-            codeCompletion = new CDS.CSharpScripting.Server.CodeCompletion();
+            codeCompletion = new CDS.CSharpScripting.EditorServices.CodeCompletion();
         }
     }
 }

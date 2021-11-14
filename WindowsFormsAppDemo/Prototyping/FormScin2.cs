@@ -13,7 +13,7 @@ namespace WindowsFormsAppDemo.Prototyping
 {
     public partial class FormScin2 : Form
     {
-        CDS.CSharpScripting.Server.CodeCompletion codeCompletion;
+        CDS.CSharpScripting.EditorServices.CodeCompletion codeCompletion;
 
 
         async Task<IEnumerable<string>> TestGetAutoCompleteWords(CancellationToken cancellationToken)
@@ -72,7 +72,7 @@ namespace WindowsFormsAppDemo.Prototyping
 
         private void FormScin2_Load(object sender, EventArgs e)
         {
-            codeCompletion = new CDS.CSharpScripting.Server.CodeCompletion();
+            codeCompletion = new CDS.CSharpScripting.EditorServices.CodeCompletion();
 
             editor.GetAutoCompleteList = GetAutoCompletions;
         }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CDS.CSharpScripting.Server
+namespace CDS.CSharpScripting.EditorServices
 {
     public class CompletionEntry
     {

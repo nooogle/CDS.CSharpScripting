@@ -18,7 +18,7 @@ echo --------------------------------------------------------
 echo Refresh the nupsec package
 echo --------------------------------------------------------
 
-.\..\packages\NuGet.CommandLine.5.7.0\tools\NuGet.exe  pack CDS.CSharpScripting.csproj -Prop Configuration=Release -Version %ver%
+.\..\packages\NuGet.CommandLine.5.11.0\tools\NuGet.exe  pack CDS.CSharpScripting.csproj -Prop Configuration=Release -Version %ver%
 
 
 

@@ -1,11 +1,12 @@
 ﻿using Microsoft.CodeAnalysis;
 using System.Collections.Generic;
+using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
 
-namespace CDS.CSharpScripting.Server
+namespace CDS.CSharpScripting.EditorServices
 {
     public class CodeCompletion
     {
@@ -15,9 +16,29 @@ namespace CDS.CSharpScripting.Server
         string lastScript = "";
         Microsoft.CodeAnalysis.Completion.CompletionList lastCompletionList;
 
+        static void ForceAssembliesToBeExplicitlyDependent(IEnumerable<Type> types)
+        {
+            foreach(var type in types)
+            {
+                if(type== null)
+                {
+                    throw new NullReferenceException();
+                }
+            }
+        }
 
         public CodeCompletion()
         {
+            ForceAssembliesToBeExplicitlyDependent(new[]
+            {
+                typeof(System.Composition.CompositionContextExtensions),
+                typeof(System.Reflection.Metadata.ArrayShape),
+                typeof(Microsoft.CSharp.CSharpCodeProvider),
+                typeof(Microsoft.CodeAnalysis.CSharp.Formatting.CSharpFormattingOptions),
+            });
+
+
+
             var compilationOptions = new
                 Microsoft
                 .CodeAnalysis
