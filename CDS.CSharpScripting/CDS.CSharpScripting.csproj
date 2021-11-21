@@ -158,6 +158,8 @@
     <Compile Include="CompilationOutput.cs" />
     <Compile Include="CompiledScript.cs" />
     <Compile Include="ConsoleOutputHook.cs" />
+    <Compile Include="EditorServices\ScriptEnv.cs" />
+    <Compile Include="EditorServices\Server.cs" />
     <Compile Include="ScintillaNETEditor\CodeEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -183,7 +185,6 @@
     <Compile Include="ScintillaNETEditor\SearchManager.cs" />
     <Compile Include="ScriptCompiler.cs" />
     <Compile Include="ScriptRunner.cs" />
-    <Compile Include="EditorServices\CodeCompletion.cs" />
     <Compile Include="EditorServices\CompletionEntry.cs" />
     <Compile Include="EditorServices\Delegates.cs" />
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CDS.CSharpScripting.EditorServices
 {
-    public class CodeCompletion
+    public class ScriptEnv
     {
         Microsoft.CodeAnalysis.Document scriptDocument;
         //Microsoft.CodeAnalysis.Completion.CompletionService completionService;
@@ -27,7 +27,7 @@ namespace CDS.CSharpScripting.EditorServices
             }
         }
 
-        public CodeCompletion()
+        public ScriptEnv()
         {
             ForceAssembliesToBeExplicitlyDependent(new[]
             {
