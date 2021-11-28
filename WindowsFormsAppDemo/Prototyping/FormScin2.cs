@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -72,7 +73,22 @@ namespace WindowsFormsAppDemo.Prototyping
 
         private void FormScin2_Load(object sender, EventArgs e)
         {
-            codeCompletion = new CDS.CSharpScripting.EditorServices.ScriptEnv();
+        Type[] namespaceTypes = new[]
+        {
+            typeof(int), // using System;
+        };
+
+
+        Type[] referenceTypes = new[]
+        {
+            typeof(int), // mscorlib.dll
+            typeof(System.Drawing.Point), // System.Drawing.dll
+        };
+
+            codeCompletion = new CDS.CSharpScripting.EditorServices.ScriptEnv(
+                namespaceTypes: namespaceTypes,
+                additionalAssemblies: referenceTypes.Select(r => r.Assembly),
+                typeOfGlobals: null);
 
             editor.GetAutoCompleteList = GetAutoCompletions;
         }

@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -39,7 +40,10 @@ namespace WindowsFormsAppDemo.Prototyping
 
         private void FormScin1_Load(object sender, EventArgs e)
         {
-            codeCompletion = new CDS.CSharpScripting.EditorServices.ScriptEnv();
+            codeCompletion = new CDS.CSharpScripting.EditorServices.ScriptEnv(
+                    namespaceTypes: new Type[] { },
+                    additionalAssemblies: new Assembly[] { },
+                    typeOfGlobals: null);
         }
     }
 }

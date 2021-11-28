@@ -5,7 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Reflection;
 
-namespace CDS.CSharpScripting.EditorServices
+namespace CDS.CSharpScript.Core
 {
     public class ScriptEnv
     {
@@ -26,11 +26,19 @@ namespace CDS.CSharpScripting.EditorServices
             }
         }
 
+        public ScriptEnv()
+            : this(
+                  namespaceTypes: new Type[] { },
+                  additionalAssemblies: new Assembly[] { },
+                  typeOfGlobals: null)
+        {
+        }
+
+
         public ScriptEnv(
             IEnumerable<Type> namespaceTypes,
             IEnumerable<Assembly> additionalAssemblies,
             Type typeOfGlobals)
-
         {
             var compilationOptions = new
                 Microsoft
@@ -208,6 +216,16 @@ namespace CDS.CSharpScripting.EditorServices
             //d.Wait();
 
             return "?";
+        }
+
+        public async Task<IEnumerable<CompletionEntry>> GetCompletions(
+            string script,
+            int caretPosition)
+        {
+            return await GetCompletions(
+                script: script, 
+                caretPosition: caretPosition, 
+                cancellationToken: default);
         }
 
         public async Task<IEnumerable<CompletionEntry>> GetCompletions(
