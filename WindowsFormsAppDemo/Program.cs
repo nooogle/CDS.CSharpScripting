@@ -15,7 +15,7 @@ namespace WindowsFormsAppDemo
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new FormMain());
-            Application.Run(new Prototyping.FormScin2());
+            Application.Run(new Prototyping.FormScin3());
         }
     }
 }

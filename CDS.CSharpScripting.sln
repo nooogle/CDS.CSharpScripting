@@ -26,6 +26,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TempConsoleTest", "TempCons
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CDS.CSharpScript.Core", "CDS.CSharpScript.Core\CDS.CSharpScript.Core.csproj", "{198C472E-F888-4346-9232-D7F1010DDF20}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CDS.CSharpScript.ScintillaEditor", "CDS.CSharpScript.ScintillaEditor\CDS.CSharpScript.ScintillaEditor.csproj", "{2ED96D4C-DE01-4D66-B567-764C2ADD0A99}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		SharedAssemblyInfo\SharedAssemblyInfo.projitems*{21e572c8-c82e-4115-bdbd-acdb0d7ef6e8}*SharedItemsImports = 13
@@ -66,6 +68,10 @@ Global
 		{198C472E-F888-4346-9232-D7F1010DDF20}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{198C472E-F888-4346-9232-D7F1010DDF20}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{198C472E-F888-4346-9232-D7F1010DDF20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2ED96D4C-DE01-4D66-B567-764C2ADD0A99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2ED96D4C-DE01-4D66-B567-764C2ADD0A99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2ED96D4C-DE01-4D66-B567-764C2ADD0A99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2ED96D4C-DE01-4D66-B567-764C2ADD0A99}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

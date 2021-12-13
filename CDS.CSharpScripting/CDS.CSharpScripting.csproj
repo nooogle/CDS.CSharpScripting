@@ -160,6 +160,12 @@
     <Compile Include="ConsoleOutputHook.cs" />
     <Compile Include="EditorServices\ScriptEnv.cs" />
     <Compile Include="EditorServices\Server.cs" />
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
     <Compile Include="ScintillaNETEditor\CodeEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>

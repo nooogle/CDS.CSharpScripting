@@ -12,20 +12,12 @@ namespace ScratchPad
     {
         static async Task Main()
         {
-            for (int i = 0; i < 1000; i++)
-            {
-                CDS.CSharpScripting.EditorServices.ScriptEnv scriptEnv = new CDS.CSharpScripting.EditorServices.ScriptEnv(
-                    namespaceTypes: new Type[] { },
-                    additionalAssemblies: new Assembly[] { },
-                    typeOfGlobals: null);
+            var workspace = new CDS.CSharpScript.Core.Editor.Workspace();
 
-                var cancellationTokenSource = new CancellationTokenSource();
-
-                var completions = await scriptEnv.GetCompletions(
-                    script: "int.",
-                    caretPosition: 4,
-                    cancellationToken: cancellationTokenSource.Token);
-            }
+            var completions = await CDS.CSharpScript.Core.Editor.Completions.GetCompletions(
+                workspace: workspace,
+                script: "int.",
+                caretPosition: 4);
 
             Console.ReadKey();
         }

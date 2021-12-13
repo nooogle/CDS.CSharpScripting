@@ -193,6 +193,12 @@
     <Compile Include="Prototyping\FormScin1.Designer.cs">
       <DependentUpon>FormScin1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Prototyping\FormScin3.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Prototyping\FormScin3.Designer.cs">
+      <DependentUpon>FormScin3.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="FormNonDefaultTypesDemo.resx">
       <DependentUpon>FormNonDefaultTypesDemo.cs</DependentUpon>
     </EmbeddedResource>
@@ -229,6 +235,9 @@
     <EmbeddedResource Include="Prototyping\FormScin1.resx">
       <DependentUpon>FormScin1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Prototyping\FormScin3.resx">
+      <DependentUpon>FormScin3.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -244,6 +253,14 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CDS.CSharpScript.Core\CDS.CSharpScript.Core.csproj">
+      <Project>{198c472e-f888-4346-9232-d7f1010ddf20}</Project>
+      <Name>CDS.CSharpScript.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CDS.CSharpScript.ScintillaEditor\CDS.CSharpScript.ScintillaEditor.csproj">
+      <Project>{2ed96d4c-de01-4d66-b567-764c2add0a99}</Project>
+      <Name>CDS.CSharpScript.ScintillaEditor</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CDS.CSharpScripting\CDS.CSharpScripting.csproj">
       <Project>{931cc421-e9a5-420b-bd21-385a3cfd9a77}</Project>
       <Name>CDS.CSharpScripting</Name>

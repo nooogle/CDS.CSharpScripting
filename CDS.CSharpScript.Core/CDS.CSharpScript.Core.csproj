@@ -121,9 +121,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CompletionEntry.cs" />
+    <Compile Include="Editor\CompletionEntry.cs" />
+    <Compile Include="Editor\Completions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ScriptEnv.cs" />
+    <Compile Include="Editor\Workspace.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

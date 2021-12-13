@@ -4,29 +4,18 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Reflection;
+using System.Collections.Immutable;
 
-namespace CDS.CSharpScript.Core
+namespace CDS.CSharpScript.Core.Editor
 {
-    public class ScriptEnv
+    public class Workspace
     {
-        Microsoft.CodeAnalysis.Document scriptDocument;
-        //Microsoft.CodeAnalysis.Completion.CompletionService completionService;
-        Microsoft.CodeAnalysis.Completion.CompletionList completionList;
-        string lastScript = "";
-        Microsoft.CodeAnalysis.Completion.CompletionList lastCompletionList;
+        Microsoft.CodeAnalysis.AdhocWorkspace adhocWorkspace;
 
-        static void ForceAssembliesToBeExplicitlyDependent(IEnumerable<Type> types)
-        {
-            foreach (var type in types)
-            {
-                if (type == null)
-                {
-                    throw new NullReferenceException();
-                }
-            }
-        }
+        public Microsoft.CodeAnalysis.Document Document { get; private set; }
 
-        public ScriptEnv()
+
+        public Workspace()
             : this(
                   namespaceTypes: new Type[] { },
                   additionalAssemblies: new Assembly[] { },
@@ -35,76 +24,83 @@ namespace CDS.CSharpScript.Core
         }
 
 
-        public ScriptEnv(
+        public Workspace(
             IEnumerable<Type> namespaceTypes,
             IEnumerable<Assembly> additionalAssemblies,
             Type typeOfGlobals)
         {
+            ImmutableArray<string> usings = ImmutableArray<string>.Empty;
+            usings = usings.Add("System");
+            foreach (var type in namespaceTypes)
+            {
+                usings = usings.Add(type.Namespace);
+            }
+
             var compilationOptions = new
                 Microsoft
                 .CodeAnalysis
                 .CSharp
                 .CSharpCompilationOptions(
                     outputKind: Microsoft.CodeAnalysis.OutputKind.DynamicallyLinkedLibrary,
-                    usings: new[] { "System" });
+                    usings: usings);
 
-            var metadataReferences = new[]
+            var metadataReferences = new List<Microsoft.CodeAnalysis.PortableExecutableReference>
             {
                 Microsoft
                     .CodeAnalysis
                     .MetadataReference
-                    .CreateFromFile(typeof(object).Assembly.Location),
+                    .CreateFromFile(typeof(object).Assembly.Location)
             };
+
+            foreach (var additionalAssembly in additionalAssemblies)
+            {
+                metadataReferences.Add(
+                    Microsoft
+                        .CodeAnalysis
+                        .MetadataReference
+                        .CreateFromFile(typeof(System.IO.Path).Assembly.Location));
+            }
 
             var projectId = Microsoft.CodeAnalysis.ProjectId.CreateNewId();
             var projectVersion = Microsoft.CodeAnalysis.VersionStamp.Create();
 
-            //var assemblies =
-            //    Microsoft
-            //    .CodeAnalysis
-            //    .Host
-            //    .Mef
-            //    .MefHostServices
-            //    .DefaultAssemblies;
+            var assemblies =
+                Microsoft
+                .CodeAnalysis
+                .Host
+                .Mef
+                .MefHostServices
+                .DefaultAssemblies
+                .AddRange(additionalAssemblies);
 
-            var assemblies = new List<Assembly>();
-            assemblies.Add(Assembly.Load("Microsoft.CodeAnalysis"));
-            assemblies.Add(Assembly.Load("Microsoft.CodeAnalysis.Workspaces"));
-            assemblies.Add(Assembly.Load("Microsoft.CodeAnalysis.CSharp"));
-            assemblies.Add(Assembly.Load("Microsoft.CodeAnalysis.CSharp.Workspaces"));
-            assemblies.Add(Assembly.Load("Microsoft.CodeAnalysis.Features"));
-            assemblies.Add(Assembly.Load("Microsoft.CodeAnalysis.CSharp.Features"));
-            assemblies.AddRange(additionalAssemblies);
+            var partTypes = Microsoft
+                .CodeAnalysis
+                .Host
+                .Mef
+                .MefHostServices
+                .DefaultAssemblies
+                .Concat(assemblies)
+                .Distinct()
+                .SelectMany(x => x.GetTypes())
+                .ToArray();
 
-            //var partTypes = Microsoft
-            //    .CodeAnalysis
-            //    .Host
-            //    .Mef
-            //    .MefHostServices
-            //    .DefaultAssemblies
-            //    .Concat(assemblies)
-            //        .Distinct()
-            //        .SelectMany(x => x.GetTypes())
-            //        .ToArray();
-
-            //var compositionContext = new System
-            //    .Composition
-            //    .Hosting
-            //    .ContainerConfiguration()
-            //    .WithParts(partTypes)
-            //    .CreateContainer();
+            var compositionContext = new System
+                .Composition
+                .Hosting
+                .ContainerConfiguration()
+                .WithParts(partTypes)
+                .CreateContainer();
 
             var mefHostServices = Microsoft
                 .CodeAnalysis
                 .Host
                 .Mef
                 .MefHostServices
-                .Create(assemblies);
+                .Create(compositionContext);
 
-            var workspace = new
+            adhocWorkspace = new
                 Microsoft
                 .CodeAnalysis
-                //.AdhocWorkspace();
                 .AdhocWorkspace(mefHostServices);
 
             var projectReference = new Microsoft.CodeAnalysis.ProjectReference(projectId);
@@ -121,9 +117,22 @@ namespace CDS.CSharpScript.Core
                     language: Microsoft.CodeAnalysis.LanguageNames.CSharp,
                     isSubmission: true)
                 .WithMetadataReferences(metadataReferences)
-                .WithCompilationOptions(compilationOptions);
+                .WithCompilationOptions(compilationOptions)
+                .WithDefaultNamespace("using System.IO");
 
-            var solution = workspace.CurrentSolution.AddProject(projectInfo);
+            var parseOptions = new 
+                Microsoft
+                .CodeAnalysis
+                .CSharp
+                .CSharpParseOptions(Microsoft.CodeAnalysis.CSharp.LanguageVersion.CSharp7_1);
+
+            var solution =
+                adhocWorkspace
+                .CurrentSolution
+                .AddProject(projectInfo)
+                .WithProjectParseOptions(
+                    projectId: projectId,
+                    options: parseOptions);
 
             var sourceVersion = Microsoft.CodeAnalysis.VersionStamp.Create();
 
@@ -156,9 +165,9 @@ namespace CDS.CSharpScript.Core
                 loader: textLoader);
 
             solution = solution.AddDocument(scriptDocumentInfo);
-            bool ok = workspace.TryApplyChanges(solution);
+            bool ok = adhocWorkspace.TryApplyChanges(solution);
             System.Diagnostics.Debug.Assert(ok);
-            this.scriptDocument = solution.GetDocument(documentId);
+            this.Document = solution.GetDocument(documentId);
         }
 
 
@@ -241,7 +250,7 @@ namespace CDS.CSharpScript.Core
                 .From(script);
 
             var document =
-                this.scriptDocument
+                this.Document
                 .WithText(sourceText);
 
             var completionService =
@@ -251,7 +260,7 @@ namespace CDS.CSharpScript.Core
                 .CompletionService
                 .GetService(document);
 
-            completionList = await
+            var completionList = await
                 completionService
                 .GetCompletionsAsync(
                     document,

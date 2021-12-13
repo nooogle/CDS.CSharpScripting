@@ -132,7 +132,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Completions1.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -146,9 +145,9 @@
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.3.3.3\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CDS.CSharpScripting\CDS.CSharpScripting.csproj">
-      <Project>{931cc421-e9a5-420b-bd21-385a3cfd9a77}</Project>
-      <Name>CDS.CSharpScripting</Name>
+    <ProjectReference Include="..\CDS.CSharpScript.Core\CDS.CSharpScript.Core.csproj">
+      <Project>{198c472e-f888-4346-9232-d7f1010ddf20}</Project>
+      <Name>CDS.CSharpScript.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Immutable;
 
-namespace CDS.CSharpScript.Core
+namespace CDS.CSharpScript.Core.Editor
 {
     public class CompletionEntry
     {
