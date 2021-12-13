@@ -41,6 +41,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.btnCancelScriptDemo = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
+            this.btnReuseEditor = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnBasicDemo
@@ -154,12 +156,32 @@
             this.btnCancelScriptDemo.UseVisualStyleBackColor = true;
             this.btnCancelScriptDemo.Click += new System.EventHandler(this.btnCancelScriptDemo_Click);
             // 
+            // label7
+            // 
+            this.label7.Location = new System.Drawing.Point(110, 402);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(376, 59);
+            this.label7.TabIndex = 16;
+            this.label7.Text = "Reuse a previously created editor to avoid leaking";
+            // 
+            // btnReuseEditor
+            // 
+            this.btnReuseEditor.Location = new System.Drawing.Point(12, 402);
+            this.btnReuseEditor.Name = "btnReuseEditor";
+            this.btnReuseEditor.Size = new System.Drawing.Size(92, 59);
+            this.btnReuseEditor.TabIndex = 15;
+            this.btnReuseEditor.Text = "Reuse editor";
+            this.btnReuseEditor.UseVisualStyleBackColor = true;
+            this.btnReuseEditor.Click += new System.EventHandler(this.btnReuseEditor_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(497, 469);
+            this.ClientSize = new System.Drawing.Size(497, 541);
             this.ControlBox = false;
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.btnReuseEditor);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.btnCancelScriptDemo);
             this.Controls.Add(this.label5);
@@ -194,5 +216,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button btnCancelScriptDemo;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button btnReuseEditor;
     }
 }

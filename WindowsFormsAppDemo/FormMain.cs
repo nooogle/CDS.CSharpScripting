@@ -69,5 +69,13 @@ namespace WindowsFormsAppDemo
                 form.ShowDialog(this);
             }
         }
+
+        private void btnReuseEditor_Click(object sender, EventArgs e)
+        {
+            using (var form = new FormReuseEditorDemo())
+            {
+                form.ShowDialog(this);
+            }
+        }
     }
 }
