@@ -47,19 +47,42 @@ namespace CDS.CSharpScripting
         [SettingsBindable(true)]
         public string CDSScript
         {
-            get => isInitialised ? editor.Document.Text : labelTempScript.Text;
+            get => GetScript();
+            set => SetScript(value);
+        }
 
-            set
+        private void SetScript(string value)
+        {
+            if (isInitialised)
             {
-                if (isInitialised)
-                {
-                    editor.Document.Text = value;
-                }
-                else
-                {
-                    labelTempScript.Text = value;
-                }
+                SetScriptOnEditor(value);
             }
+            else
+            {
+                labelTempScript.Text = value;
+            }
+        }
+
+        private void SetScriptOnEditor(string value)
+        {
+            editor.Document.Text = value;
+        }
+
+        private string GetScript()
+        {
+            if (isInitialised)
+            {
+                return GetScriptFromEditor();
+            }
+            else
+            {
+                return labelTempScript.Text;
+            }
+        }
+
+        private string GetScriptFromEditor()
+        {
+            return editor.Document.Text;
         }
 
 
