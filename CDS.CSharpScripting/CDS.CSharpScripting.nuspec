@@ -2,7 +2,7 @@
 <package >
 	<metadata>
 		<id>CDS.CSharpScripting</id>
-		<version>1.0.14</version>
+		<version>1.0.15</version>
 		<title>CDS.CSharpScripting</title>
 		<authors>Jon Shadforth</authors>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -10,7 +10,7 @@
 		<projectUrl>https://github.com/nooogle/CDS.CSharpScripting</projectUrl>
 		<description>C# code editor (using RoslynPad) and simplified C# compilation and execution</description>
 		<releaseNotes>First release</releaseNotes>
-		<copyright>Copyright (c) 2020 Carpe Diem Systems Ltd.</copyright>
+		<copyright>Copyright (c) 2020-21 Carpe Diem Systems Ltd.</copyright>
 		<tags>C# Scripting RoslynPad</tags>
 		<dependencies>
 			<group targetFramework=".NETFramework4.8" />
