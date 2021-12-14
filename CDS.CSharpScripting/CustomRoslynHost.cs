@@ -36,7 +36,7 @@ namespace CDS.CSharpScripting
             var name = args.Name ?? "Program";
             var id = ProjectId.CreateNewId(name);
 
-            var parseOptions = new CSharpParseOptions(kind: SourceCodeKind.Script, languageVersion: LanguageVersion.Latest);
+            var parseOptions = new CSharpParseOptions(kind: SourceCodeKind.Script, languageVersion: LanguageVersion.CSharp7_1);
 
             compilationOptions = compilationOptions.WithScriptClassName(name);
 
