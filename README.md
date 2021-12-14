@@ -155,3 +155,17 @@ private static void Application_ThreadException(object sender, System.Threading.
 
 
 ```
+
+## Assembly memory leaks and re-using a script editor
+
+It seems that programmatically loaded assemblies are not freed during 
+normal garbage collection. This means that creating and disposing multiple
+instances of the editor progressively leaks memory. So far I can't find
+a way to fix this. I tried using an AppDomain (which can drop assemblies)
+but haven't managed to get it working in this UI environment.
+
+For now, the best option I've found it to cache a script editor and
+effectively re-use it. The Reuse Editor demo shows how I've used a
+static instance of the editor, and keep it happy by moving it into a
+static 'parking' form each time the parent form is dropped.
+
