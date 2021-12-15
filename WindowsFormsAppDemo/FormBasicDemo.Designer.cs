@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.btnRun = new System.Windows.Forms.Button();
-            this.csharpEditor = new CDS.CSharpScripting.CodeEditor();
-            this.compilationOutput = new CDS.CSharpScripting.OutputPanel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.runtimeOutput = new CDS.CSharpScripting.OutputPanel();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.csharpEditor = new CDS.CSharpScripting.CodeEditor();
+            this.compilationOutput = new CDS.CSharpScripting.OutputPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -48,28 +48,6 @@
             this.btnRun.Text = "Run";
             this.btnRun.UseVisualStyleBackColor = true;
             this.btnRun.Click += new System.EventHandler(this.btnRun_Click);
-            // 
-            // csharpEditor
-            // 
-            this.csharpEditor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.csharpEditor.CDSScript = "Console.WriteLine(\"Hello world!\");";
-            this.csharpEditor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.csharpEditor.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.csharpEditor.Location = new System.Drawing.Point(6, 26);
-            this.csharpEditor.Margin = new System.Windows.Forms.Padding(6);
-            this.csharpEditor.Name = "csharpEditor";
-            this.csharpEditor.Size = new System.Drawing.Size(764, 156);
-            this.csharpEditor.TabIndex = 3;
-            // 
-            // compilationOutput
-            // 
-            this.compilationOutput.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.compilationOutput.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.compilationOutput.Location = new System.Drawing.Point(6, 214);
-            this.compilationOutput.Margin = new System.Windows.Forms.Padding(6);
-            this.compilationOutput.Name = "compilationOutput";
-            this.compilationOutput.Size = new System.Drawing.Size(764, 72);
-            this.compilationOutput.TabIndex = 4;
             // 
             // tableLayoutPanel1
             // 
@@ -123,6 +101,28 @@
             this.label2.Size = new System.Drawing.Size(94, 13);
             this.label2.TabIndex = 5;
             this.label2.Text = "Compilation output";
+            // 
+            // csharpEditor
+            // 
+            this.csharpEditor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.csharpEditor.CDSScript = "Console.WriteLine(\"Hello world!\");";
+            this.csharpEditor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.csharpEditor.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.csharpEditor.Location = new System.Drawing.Point(6, 26);
+            this.csharpEditor.Margin = new System.Windows.Forms.Padding(6);
+            this.csharpEditor.Name = "csharpEditor";
+            this.csharpEditor.Size = new System.Drawing.Size(764, 156);
+            this.csharpEditor.TabIndex = 3;
+            // 
+            // compilationOutput
+            // 
+            this.compilationOutput.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.compilationOutput.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.compilationOutput.Location = new System.Drawing.Point(6, 214);
+            this.compilationOutput.Margin = new System.Windows.Forms.Padding(6);
+            this.compilationOutput.Name = "compilationOutput";
+            this.compilationOutput.Size = new System.Drawing.Size(764, 72);
+            this.compilationOutput.TabIndex = 4;
             // 
             // label1
             // 

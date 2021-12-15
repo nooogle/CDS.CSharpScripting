@@ -51,6 +51,18 @@ namespace CDS.CSharpScripting
             set => SetScript(value);
         }
 
+
+        /// <summary>
+        /// Sets a new script
+        /// </summary>
+        /// <param name="value">Script</param>
+        /// <remarks>
+        /// We split between initialised and uninitialised because at design-time, when 
+        /// we're not initialised, the Avolon control doesn't seem to be accessible and
+        /// causes a design-time exception. With this method we won't hit any code 
+        /// that would cause the Avalon edit to be hit at design time; the script is
+        /// 'parked' on a standard .Net label
+        /// </remarks>
         private void SetScript(string value)
         {
             if (isInitialised)
@@ -63,11 +75,21 @@ namespace CDS.CSharpScripting
             }
         }
 
+
+        /// <summary>
+        /// Sets the script on the real editor
+        /// </summary>
         private void SetScriptOnEditor(string value)
         {
             editor.Document.Text = value;
         }
 
+
+        /// <summary>
+        /// Gets the script
+        /// </summary>
+        /// <returns>Script</returns>
+        /// <remarks>See <see cref="SetScript(string)"/> for more info</remarks>
         private string GetScript()
         {
             if (isInitialised)
@@ -80,6 +102,10 @@ namespace CDS.CSharpScripting
             }
         }
 
+
+        /// <summary>
+        /// Gets the script from the real editor
+        /// </summary>
         private string GetScriptFromEditor()
         {
             return editor.Document.Text;
@@ -101,6 +127,7 @@ namespace CDS.CSharpScripting
         {
             InitializeComponent();
         }
+
 
 
         /// <summary>
@@ -198,18 +225,20 @@ namespace CDS.CSharpScripting
 
             editor.IsBraceCompletionEnabled = true;
 
-            // This causes the light bulb to appear but the context menu doesn't
-            // seem to work properly...
+            {
+                // This causes the light bulb to appear but the context menu doesn't
+                // seem to work properly...
 
-            //var handle = Properties.Resource.IntellisenseLightBulb_16x.GetHbitmap();
+                //var handle = Properties.Resource.IntellisenseLightBulb_16x.GetHbitmap();
 
-            //editor.ContextActionsIcon = Imaging.CreateBitmapSourceFromHBitmap(
-            //    handle,
-            //    IntPtr.Zero,
-            //    Int32Rect.Empty,
-            //    BitmapSizeOptions.FromEmptyOptions());
+                //editor.ContextActionsIcon = Imaging.CreateBitmapSourceFromHBitmap(
+                //    handle,
+                //    IntPtr.Zero,
+                //    Int32Rect.Empty,
+                //    BitmapSizeOptions.FromEmptyOptions());
 
-            //DeleteObject(handle);
+                //DeleteObject(handle);
+            }
 
             editor.SyntaxHighlighting = HighlightingManager.Instance.GetDefinition("C#");
             editor.FontFamily = new System.Windows.Media.FontFamily(this.Font.FontFamily.Name);
@@ -222,7 +251,10 @@ namespace CDS.CSharpScripting
         }
 
 
-        private static CustomRoslynHost CreateRosylnHost(Type globalsType, List<Assembly> referenceTypesIncludingGlobalsType, List<Type> namespaceTypesIncludingGlobalsType)
+        private static CustomRoslynHost CreateRosylnHost(
+            Type globalsType, 
+            List<Assembly> referenceTypesIncludingGlobalsType, 
+            List<Type> namespaceTypesIncludingGlobalsType)
         {
             var namespaceImports =
                 RoslynHostReferences
@@ -239,6 +271,7 @@ namespace CDS.CSharpScripting
                     Assembly.Load("RoslynPad.Editor.Windows"),
                 },
                 references: namespaceImports);
+
             return roslynHost;
         }
 

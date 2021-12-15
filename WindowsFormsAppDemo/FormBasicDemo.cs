@@ -20,6 +20,7 @@ namespace WindowsFormsAppDemo
         }
 
 
+
         private void btnRun_Click(object sender, EventArgs e)
         {
             ClearOutput();
@@ -67,11 +68,6 @@ namespace WindowsFormsAppDemo
             }
 
             runtimeOutput.CDSWriteLine("* Script run complete *");
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            
         }
     }
 }
