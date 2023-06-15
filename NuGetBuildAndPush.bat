@@ -18,7 +18,7 @@ echo --------------------------------------------------------
 echo Refresh the nupsec package
 echo --------------------------------------------------------
 
-.\..\packages\NuGet.CommandLine.6.0.0\tools\NuGet.exe  pack CDS.CSharpScripting.csproj -Prop Configuration=Release -Version %ver%
+.\..\packages\NuGet.CommandLine.6.6.1\tools\NuGet.exe  pack CDS.CSharpScripting.csproj -Prop Configuration=Release -Version %ver%
 
 
 
@@ -27,7 +27,7 @@ echo --------------------------------------------------------
 echo Push
 echo --------------------------------------------------------
 
-set command=.\..\packages\NuGet.CommandLine.6.0.0\tools\NuGet.exe push CDS.CSharpScripting.%ver%.nupkg %api_key% -Source https://api.nuget.org/v3/index.json
+set command=.\..\packages\NuGet.CommandLine.6.6.1\tools\NuGet.exe push CDS.CSharpScripting.%ver%.nupkg %api_key% -Source https://api.nuget.org/v3/index.json
 echo.
 echo Push command looks like this:
 echo.
