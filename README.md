@@ -1,3 +1,13 @@
+# No longer being developed
+
+The underlying RoslynPad library has been updated to support only .Net, not .Net Framework. 
+I'm not planning to update this library to support .Net because it's used by
+.Net Framework projects.
+
+The last update, V1.0.20, just updates the NuGet library (which was flagged as vulnerable),
+and adds a strong key to the assembly.
+
+
 # CDS.CSharpScripting
 
 Super-simple .Net Framework tools for C# scripting, including:
