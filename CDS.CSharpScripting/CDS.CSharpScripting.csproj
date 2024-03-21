@@ -34,6 +34,12 @@
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Release\CDS.CSharpScripting.xml</DocumentationFile>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>cds_csharpscripting.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Humanizer, Version=2.13.0.0, Culture=neutral, PublicKeyToken=979442b78dfc278e, processorArchitecture=MSIL">
       <HintPath>..\packages\Humanizer.Core.2.13.14\lib\netstandard2.0\Humanizer.dll</HintPath>
@@ -202,6 +208,7 @@
     <None Include="CDS.CSharpScripting.nuspec" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="cds_csharpscripting.snk" />
     <None Include="packages.config" />
     <None Include="Resources\IntellisenseLightBulb_16x.png" />
   </ItemGroup>
